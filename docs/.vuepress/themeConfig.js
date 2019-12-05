@@ -28,11 +28,11 @@ module.exports = {
 function renderSiderBar() {
   return ([
     ["/notes/", "首页"],
-    {
-      title: "基础篇",
-      collapsable: false,
-      children: readFileList('base')
-    },
+    // {
+    //   title: "基础篇",
+    //   collapsable: false,
+    //   children: readFileList('base')
+    // },
     // {
     //   title: "高级篇",
     //   collapsable: false,

@@ -28,5 +28,5 @@ branches:
     - master
 env:
  global:
-   - GH_REF: github.com/poetries/monthly.git
+   - GH_REF: github.com/poetries/node-learning-notes.git
    
