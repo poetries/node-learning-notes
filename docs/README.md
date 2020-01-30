@@ -2,7 +2,7 @@
 home: true
 heroImage: logo.svg
 actionText: 开始 →
-actionLink: /notes/
+actionLink: /notes/base/01-Node.js 基础
 features:
 - title: 简洁至上
   details: 追求重点和难点,剔除陈旧的知识。

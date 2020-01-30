@@ -13,10 +13,13 @@ function readFileList(dir) {
   files.forEach((item) => {
     const filename = item.slice(0, -3);
     const name = filename.split('-')[1]
-    fileList.push([
-      `${dir}/${filename}`,
-      `${name}`
-    ]);
+
+    if(filename && name) {
+      fileList.push([
+        `${dir}/${filename}`,
+        `${name}`
+      ]);
+    }
   });
   return fileList;
 }
