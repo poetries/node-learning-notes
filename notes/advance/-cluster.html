@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>写在前面 | Node.js学习指南</title>
+    <meta name="description" content="Node.js笔记系统整理">
+    <meta name="generator" content="VuePress 1.3.0">
+    <link rel="icon" href="/node-learning-notes/logo.png">
+  <link rel="manifest" href="/node-learning-notes/manifest.json">
+  <meta name="theme-color" content="#3eaf7c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="/node-learning-notes/icons/apple-touch-icon-152x152.png">
+  <link rel="mask-icon" href="/node-learning-notes/icons/safari-pinned-tab.svg" color="#3eaf7c">
+  <meta name="msapplication-TileImage" content="/icons/msapplication-icon-144x144.png">
+  <meta name="msapplication-TileColor" content="#000000">
+  <meta name="apple-mobile-web-app-status-bar-style">
+    
+    <link rel="preload" href="/node-learning-notes/assets/css/0.styles.04d71374.css" as="style"><link rel="preload" href="/node-learning-notes/assets/js/app.06995101.js" as="script"><link rel="preload" href="/node-learning-notes/assets/js/4.cbb566af.js" as="script"><link rel="preload" href="/node-learning-notes/assets/js/37.8351c418.js" as="script"><link rel="prefetch" href="/node-learning-notes/assets/js/10.1df831e5.js"><link rel="prefetch" href="/node-learning-notes/assets/js/100.faed81e1.js"><link rel="prefetch" href="/node-learning-notes/assets/js/101.4ca9de43.js"><link rel="prefetch" href="/node-learning-notes/assets/js/102.bed33a4e.js"><link rel="prefetch" href="/node-learning-notes/assets/js/103.47cfeeb4.js"><link rel="prefetch" href="/node-learning-notes/assets/js/104.99382f62.js"><link rel="prefetch" href="/node-learning-notes/assets/js/105.a09c57ad.js"><link rel="prefetch" href="/node-learning-notes/assets/js/106.e0e65ae5.js"><link rel="prefetch" href="/node-learning-notes/assets/js/107.006157e7.js"><link rel="prefetch" href="/node-learning-notes/assets/js/11.6d248a1f.js"><link rel="prefetch" href="/node-learning-notes/assets/js/12.089b9acc.js"><link rel="prefetch" href="/node-learning-notes/assets/js/13.7503e5c6.js"><link rel="prefetch" href="/node-learning-notes/assets/js/14.ea26514e.js"><link rel="prefetch" href="/node-learning-notes/assets/js/15.6f7e5a72.js"><link rel="prefetch" href="/node-learning-notes/assets/js/16.15f31946.js"><link rel="prefetch" href="/node-learning-notes/assets/js/17.546f352d.js"><link rel="prefetch" href="/node-learning-notes/assets/js/18.43cadce8.js"><link rel="prefetch" href="/node-learning-notes/assets/js/19.20c00e37.js"><link rel="prefetch" href="/node-learning-notes/assets/js/20.d4bd9d39.js"><link rel="prefetch" href="/node-learning-notes/assets/js/21.147d3198.js"><link rel="prefetch" href="/node-learning-notes/assets/js/22.822af822.js"><link rel="prefetch" href="/node-learning-notes/assets/js/23.ad0f4e46.js"><link rel="prefetch" href="/node-learning-notes/assets/js/24.4ed1364a.js"><link rel="prefetch" href="/node-learning-notes/assets/js/25.e8be0e71.js"><link rel="prefetch" href="/node-learning-notes/assets/js/26.a4b68f4e.js"><link rel="prefetch" href="/node-learning-notes/assets/js/27.eaeaac83.js"><link rel="prefetch" href="/node-learning-notes/assets/js/28.ce8ab57d.js"><link rel="prefetch" href="/node-learning-notes/assets/js/29.0b3e19ed.js"><link rel="prefetch" href="/node-learning-notes/assets/js/30.409d36e7.js"><link rel="prefetch" href="/node-learning-notes/assets/js/31.dc762526.js"><link rel="prefetch" href="/node-learning-notes/assets/js/32.05ff8283.js"><link rel="prefetch" href="/node-learning-notes/assets/js/33.b095bc5b.js"><link rel="prefetch" href="/node-learning-notes/assets/js/34.ec57608e.js"><link rel="prefetch" href="/node-learning-notes/assets/js/35.5f3ea3ae.js"><link rel="prefetch" href="/node-learning-notes/assets/js/36.ef51b036.js"><link rel="prefetch" href="/node-learning-notes/assets/js/38.a20ee99d.js"><link rel="prefetch" href="/node-learning-notes/assets/js/39.88094c54.js"><link rel="prefetch" href="/node-learning-notes/assets/js/40.084cc24a.js"><link rel="prefetch" href="/node-learning-notes/assets/js/41.ceec190d.js"><link rel="prefetch" href="/node-learning-notes/assets/js/42.310c61ee.js"><link rel="prefetch" href="/node-learning-notes/assets/js/43.5b70b2d9.js"><link rel="prefetch" href="/node-learning-notes/assets/js/44.060a5dcd.js"><link rel="prefetch" href="/node-learning-notes/assets/js/45.8363b81b.js"><link rel="prefetch" href="/node-learning-notes/assets/js/46.4397f3e0.js"><link rel="prefetch" href="/node-learning-notes/assets/js/47.2ea413fc.js"><link rel="prefetch" href="/node-learning-notes/assets/js/48.aa2c07fb.js"><link rel="prefetch" href="/node-learning-notes/assets/js/49.14a61d03.js"><link rel="prefetch" href="/node-learning-notes/assets/js/5.36c9e133.js"><link rel="prefetch" href="/node-learning-notes/assets/js/50.eb271fd9.js"><link rel="prefetch" href="/node-learning-notes/assets/js/51.bc775c5f.js"><link rel="prefetch" href="/node-learning-notes/assets/js/52.fa54eb4e.js"><link rel="prefetch" href="/node-learning-notes/assets/js/53.1ee619d8.js"><link rel="prefetch" href="/node-learning-notes/assets/js/54.5d6b9ae6.js"><link rel="prefetch" href="/node-learning-notes/assets/js/55.1d902dc8.js"><link rel="prefetch" href="/node-learning-notes/assets/js/56.35cf11c3.js"><link rel="prefetch" href="/node-learning-notes/assets/js/57.a9d87e28.js"><link rel="prefetch" href="/node-learning-notes/assets/js/58.002141b4.js"><link rel="prefetch" href="/node-learning-notes/assets/js/59.b81489d4.js"><link rel="prefetch" href="/node-learning-notes/assets/js/6.58217116.js"><link rel="prefetch" href="/node-learning-notes/assets/js/60.c35e60a8.js"><link rel="prefetch" href="/node-learning-notes/assets/js/61.f822b13d.js"><link rel="prefetch" href="/node-learning-notes/assets/js/62.485b4012.js"><link rel="prefetch" href="/node-learning-notes/assets/js/63.c7c2b6b5.js"><link rel="prefetch" href="/node-learning-notes/assets/js/64.5d43709b.js"><link rel="prefetch" href="/node-learning-notes/assets/js/65.b611bc8d.js"><link rel="prefetch" href="/node-learning-notes/assets/js/66.59d2a614.js"><link rel="prefetch" href="/node-learning-notes/assets/js/67.05e9a058.js"><link rel="prefetch" href="/node-learning-notes/assets/js/68.0b86b935.js"><link rel="prefetch" href="/node-learning-notes/assets/js/69.8c93eaf6.js"><link rel="prefetch" href="/node-learning-notes/assets/js/7.9ed243c7.js"><link rel="prefetch" href="/node-learning-notes/assets/js/70.177565f8.js"><link rel="prefetch" href="/node-learning-notes/assets/js/71.617d61d2.js"><link rel="prefetch" href="/node-learning-notes/assets/js/72.cda5cf3a.js"><link rel="prefetch" href="/node-learning-notes/assets/js/73.2201f15f.js"><link rel="prefetch" href="/node-learning-notes/assets/js/74.5aad0673.js"><link rel="prefetch" href="/node-learning-notes/assets/js/75.05e9ddf5.js"><link rel="prefetch" href="/node-learning-notes/assets/js/76.909eda7b.js"><link rel="prefetch" href="/node-learning-notes/assets/js/77.d9e10d0d.js"><link rel="prefetch" href="/node-learning-notes/assets/js/78.e3ab5082.js"><link rel="prefetch" href="/node-learning-notes/assets/js/79.6bea4726.js"><link rel="prefetch" href="/node-learning-notes/assets/js/8.5121c136.js"><link rel="prefetch" href="/node-learning-notes/assets/js/80.2b3a46e0.js"><link rel="prefetch" href="/node-learning-notes/assets/js/81.d8a2b86a.js"><link rel="prefetch" href="/node-learning-notes/assets/js/82.59884135.js"><link rel="prefetch" href="/node-learning-notes/assets/js/83.7dd235af.js"><link rel="prefetch" href="/node-learning-notes/assets/js/84.75f51e4b.js"><link rel="prefetch" href="/node-learning-notes/assets/js/85.6b0d363d.js"><link rel="prefetch" href="/node-learning-notes/assets/js/86.011fd32a.js"><link rel="prefetch" href="/node-learning-notes/assets/js/87.649522e0.js"><link rel="prefetch" href="/node-learning-notes/assets/js/88.d60b555e.js"><link rel="prefetch" href="/node-learning-notes/assets/js/89.b09d6659.js"><link rel="prefetch" href="/node-learning-notes/assets/js/9.c39e9c7d.js"><link rel="prefetch" href="/node-learning-notes/assets/js/90.bdd3e393.js"><link rel="prefetch" href="/node-learning-notes/assets/js/91.4c084abf.js"><link rel="prefetch" href="/node-learning-notes/assets/js/92.8751acf1.js"><link rel="prefetch" href="/node-learning-notes/assets/js/93.7c5d406d.js"><link rel="prefetch" href="/node-learning-notes/assets/js/94.9cbbda26.js"><link rel="prefetch" href="/node-learning-notes/assets/js/95.9d6d64b9.js"><link rel="prefetch" href="/node-learning-notes/assets/js/96.1f58d5ae.js"><link rel="prefetch" href="/node-learning-notes/assets/js/97.24de5796.js"><link rel="prefetch" href="/node-learning-notes/assets/js/98.81ff5119.js"><link rel="prefetch" href="/node-learning-notes/assets/js/99.047c4c86.js"><link rel="prefetch" href="/node-learning-notes/assets/js/vendors~docsearch.73734a07.js"><link rel="prefetch" href="/node-learning-notes/assets/js/vendors~notification.c14938e7.js">
+    <link rel="stylesheet" href="/node-learning-notes/assets/css/0.styles.04d71374.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/node-learning-notes/" class="home-link router-link-active"><!----> <span class="site-name">Node.js学习指南</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/poetries/node-learning-notes" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/poetries/node-learning-notes" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>基础篇</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/node-learning-notes/notes/base/01-环境搭建.html" class="sidebar-link">环境搭建</a></li><li><a href="/node-learning-notes/notes/base/02-node部署.html" class="sidebar-link">node部署</a></li><li><a href="/node-learning-notes/notes/base/03-基础应用.html" class="sidebar-link">基础应用</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>内置模块</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>进阶篇</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/node-learning-notes/notes/advance/-5分钟入门非对称加密用法.html" class="sidebar-link">5分钟入门非对称加密用法</a></li><li><a href="/node-learning-notes/notes/advance/-cluster.html" class="active sidebar-link">cluster</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/node-learning-notes/notes/advance/-cluster.html#写在前面" class="sidebar-link">写在前面</a></li><li class="sidebar-sub-header"><a href="/node-learning-notes/notes/advance/-cluster.html#端口共享源码分析" class="sidebar-link">端口共享源码分析</a></li><li class="sidebar-sub-header"><a href="/node-learning-notes/notes/advance/-cluster.html#请求分发源码分析" class="sidebar-link">请求分发源码分析</a></li></ul></li><li><a href="/node-learning-notes/notes/advance/-cookie_parser深入.html" class="sidebar-link">cookie_parser深入</a></li><li><a href="/node-learning-notes/notes/advance/-crypto模块之理论篇.html" class="sidebar-link">crypto模块之理论篇</a></li><li><a href="/node-learning-notes/notes/advance/-express+cookie_parser：签名机制深入剖析.html" class="sidebar-link">express+cookie_parser：签名机制深入剖析</a></li><li><a href="/node-learning-notes/notes/advance/-express+session实现简易身份认证.html" class="sidebar-link">express+session实现简易身份认证</a></li><li><a href="/node-learning-notes/notes/advance/-https.html" class="sidebar-link">https</a></li><li><a href="/node-learning-notes/notes/advance/-log4js入门实例.html" class="sidebar-link">log4js入门实例</a></li><li><a href="/node-learning-notes/notes/advance/-node8_napi.html" class="sidebar-link">node8_napi</a></li><li><a href="/node-learning-notes/notes/advance/-使用 async 控制并发.html" class="sidebar-link">使用 async 控制并发</a></li><li><a href="/node-learning-notes/notes/advance/-使用 eventproxy 控制并发.html" class="sidebar-link">使用 eventproxy 控制并发</a></li><li><a href="/node-learning-notes/notes/advance/-使用 superagent 与 cheerio 完成简单爬虫.html" class="sidebar-link">使用 superagent 与 cheerio 完成简单爬虫</a></li><li><a href="/node-learning-notes/notes/advance/-基于express+muter的文件上传.html" class="sidebar-link">基于express+muter的文件上传</a></li><li><a href="/node-learning-notes/notes/advance/-将图片转成datauri嵌入到html.html" class="sidebar-link">将图片转成datauri嵌入到html</a></li><li><a href="/node-learning-notes/notes/advance/-常用中间件 body_parser 实现解析.html" class="sidebar-link">常用中间件 body_parser 实现解析</a></li><li><a href="/node-learning-notes/notes/advance/-日志模块morgan.html" class="sidebar-link">日志模块morgan</a></li><li><a href="/node-learning-notes/notes/advance/-服务端字符编解码&amp;乱码处理 charset_enc_dec.html" class="sidebar-link">服务端字符编解码&amp;乱码处理 charset_enc_dec</a></li><li><a href="/node-learning-notes/notes/advance/-测试用例：mocha，should，istanbul.html" class="sidebar-link">测试用例：mocha，should，istanbul</a></li><li><a href="/node-learning-notes/notes/advance/-调试日志打印：debug模块.html" class="sidebar-link">调试日志打印：debug模块</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Express</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Koa2</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>其他</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/node-learning-notes/notes/other/01-操作数据库.html" class="sidebar-link">操作数据库</a></li><li><a href="/node-learning-notes/notes/other/02-Session 与 Token.html" class="sidebar-link">Session 与 Token</a></li><li><a href="/node-learning-notes/notes/other/03-Cookie、Session、Token、JWT.html" class="sidebar-link">Cookie、Session、Token、JWT</a></li><li><a href="/node-learning-notes/notes/other/04-Socket.html" class="sidebar-link">Socket</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="写在前面"><a href="#写在前面" class="header-anchor">#</a> 写在前面</h2> <p>下文适合对cluster模块有一定了解的同学阅读。主要包含两部分内容：</p> <ol><li>cluster模块如何实现端口共享</li> <li>cluster模块如何分发请求</li></ol> <h2 id="端口共享源码分析"><a href="#端口共享源码分析" class="header-anchor">#</a> 端口共享源码分析</h2> <p>首先，master 进程 fork() 子进程：</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">// master进程</span>
+cluster<span class="token punctuation">.</span><span class="token function">fork</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre></div><p>子进程创建 net.Server 实例：</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">// worker进程</span>
+<span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'net'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">createServer</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token number">3000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>在 net 模块中，调用 cluster._getServer</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">// worker进程</span>
+cluster<span class="token punctuation">.</span><span class="token function">_getServer</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+  address<span class="token operator">:</span> address<span class="token punctuation">,</span>
+  port<span class="token operator">:</span> port<span class="token punctuation">,</span>
+  addressType<span class="token operator">:</span> addressType<span class="token punctuation">,</span>
+  fd<span class="token operator">:</span> fd<span class="token punctuation">,</span>
+  flags<span class="token operator">:</span> <span class="token number">0</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> cb<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">cb</span><span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span> handle</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 忽略错误处理</span>
+  self<span class="token punctuation">.</span>_handle <span class="token operator">=</span> handle<span class="token punctuation">;</span>
+  self<span class="token punctuation">.</span><span class="token function">_listen2</span><span class="token punctuation">(</span>address<span class="token punctuation">,</span> port<span class="token punctuation">,</span> addressType<span class="token punctuation">,</span> backlog<span class="token punctuation">,</span> fd<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>在 cluster._getServer 中，通过 process.send(message)，向 master 进程发送 queryServer 请求。</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">// worker进程</span>
+cluster<span class="token punctuation">.</span><span class="token function-variable function">_getServer</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">obj<span class="token punctuation">,</span> options<span class="token punctuation">,</span> cb</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> indexesKey <span class="token operator">=</span> <span class="token punctuation">[</span> options<span class="token punctuation">.</span>address<span class="token punctuation">,</span>
+                         options<span class="token punctuation">.</span>port<span class="token punctuation">,</span>
+                         options<span class="token punctuation">.</span>addressType<span class="token punctuation">,</span>
+                         options<span class="token punctuation">.</span>fd <span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">':'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>indexes<span class="token punctuation">[</span>indexesKey<span class="token punctuation">]</span> <span class="token operator">===</span> <span class="token keyword">undefined</span><span class="token punctuation">)</span>
+      indexes<span class="token punctuation">[</span>indexesKey<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">else</span>
+      indexes<span class="token punctuation">[</span>indexesKey<span class="token punctuation">]</span><span class="token operator">++</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// message =&gt;</span>
+    <span class="token comment">// {</span>
+    <span class="token comment">//   act: 'queryServer',</span>
+    <span class="token comment">//   index: ':3000:4:',</span>
+    <span class="token comment">//   data: null,</span>
+    <span class="token comment">//   address: null,</span>
+    <span class="token comment">//   port: 3000,</span>
+    <span class="token comment">//   addressType: 4,</span>
+    <span class="token comment">//   fd: undefined</span>
+    <span class="token comment">// }</span>
+    <span class="token keyword">const</span> message <span class="token operator">=</span> util<span class="token punctuation">.</span><span class="token function">_extend</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      act<span class="token operator">:</span> <span class="token string">'queryServer'</span><span class="token punctuation">,</span>
+      index<span class="token operator">:</span> indexes<span class="token punctuation">[</span>indexesKey<span class="token punctuation">]</span><span class="token punctuation">,</span>
+      data<span class="token operator">:</span> <span class="token keyword">null</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span> options<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// Set custom data on handle (i.e. tls tickets key)</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>obj<span class="token punctuation">.</span>_getServerData<span class="token punctuation">)</span> message<span class="token punctuation">.</span>data <span class="token operator">=</span> obj<span class="token punctuation">.</span><span class="token function">_getServerData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">/*
+      send 方法的定义如下，注意：masterInit 里也有 send 方法
+      function send(message, cb) {
+        return sendHelper(process, message, null, cb);
+      }
+      在 sendHelper 里对 message 进程加工，最终 message 如下所示（关键字段）：
+      { cmd: 'NODE_CLUSTER', act: 'queryServer' }
+    */</span>  
+    <span class="token function">send</span><span class="token punctuation">(</span>message<span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">reply<span class="token punctuation">,</span> handle</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>obj<span class="token punctuation">.</span>_setServerData<span class="token punctuation">)</span> obj<span class="token punctuation">.</span><span class="token function">_setServerData</span><span class="token punctuation">(</span>reply<span class="token punctuation">.</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>handle<span class="token punctuation">)</span>
+        <span class="token function">shared</span><span class="token punctuation">(</span>reply<span class="token punctuation">,</span> handle<span class="token punctuation">,</span> indexesKey<span class="token punctuation">,</span> cb<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// Shared listen socket.</span>
+      <span class="token keyword">else</span>
+        <span class="token function">rr</span><span class="token punctuation">(</span>reply<span class="token punctuation">,</span> indexesKey<span class="token punctuation">,</span> cb<span class="token punctuation">)</span><span class="token punctuation">;</span>              <span class="token comment">// Round-robin.</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    obj<span class="token punctuation">.</span><span class="token function">once</span><span class="token punctuation">(</span><span class="token string">'listening'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      cluster<span class="token punctuation">.</span>worker<span class="token punctuation">.</span>state <span class="token operator">=</span> <span class="token string">'listening'</span><span class="token punctuation">;</span>
+      <span class="token keyword">const</span> address <span class="token operator">=</span> obj<span class="token punctuation">.</span><span class="token function">address</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      message<span class="token punctuation">.</span>act <span class="token operator">=</span> <span class="token string">'listening'</span><span class="token punctuation">;</span>
+      message<span class="token punctuation">.</span>port <span class="token operator">=</span> address <span class="token operator">&amp;&amp;</span> address<span class="token punctuation">.</span>port <span class="token operator">||</span> options<span class="token punctuation">.</span>port<span class="token punctuation">;</span>
+      <span class="token function">send</span><span class="token punctuation">(</span>message<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><p>在 cluster.fork() 方法里，监听了 internalMessage 事件，onmessage里，调用了 queryServer()。</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">// master进程</span>
+cluster<span class="token punctuation">.</span><span class="token function-variable function">fork</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">env</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 忽略非关键代码</span>
+  <span class="token keyword">const</span> workerProcess <span class="token operator">=</span> <span class="token function">createWorkerProcess</span><span class="token punctuation">(</span>id<span class="token punctuation">,</span> env<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> worker <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Worker</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    id<span class="token operator">:</span> id<span class="token punctuation">,</span>
+    process<span class="token operator">:</span> workerProcess
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  worker<span class="token punctuation">.</span>process<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'internalMessage'</span><span class="token punctuation">,</span> <span class="token function">internal</span><span class="token punctuation">(</span>worker<span class="token punctuation">,</span> onmessage<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment">// </span>
+<span class="token keyword">function</span> <span class="token function">onmessage</span><span class="token punctuation">(</span><span class="token parameter">message<span class="token punctuation">,</span> handle</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">var</span> worker <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>message<span class="token punctuation">.</span>act <span class="token operator">===</span> <span class="token string">'online'</span><span class="token punctuation">)</span>
+    <span class="token function">online</span><span class="token punctuation">(</span>worker<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>message<span class="token punctuation">.</span>act <span class="token operator">===</span> <span class="token string">'queryServer'</span><span class="token punctuation">)</span>
+    <span class="token comment">// 调用 queryServer 方法</span>
+    <span class="token function">queryServer</span><span class="token punctuation">(</span>worker<span class="token punctuation">,</span> message<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>message<span class="token punctuation">.</span>act <span class="token operator">===</span> <span class="token string">'listening'</span><span class="token punctuation">)</span>
+    <span class="token function">listening</span><span class="token punctuation">(</span>worker<span class="token punctuation">,</span> message<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>message<span class="token punctuation">.</span>act <span class="token operator">===</span> <span class="token string">'exitedAfterDisconnect'</span><span class="token punctuation">)</span>
+    <span class="token function">exitedAfterDisconnect</span><span class="token punctuation">(</span>worker<span class="token punctuation">,</span> message<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>message<span class="token punctuation">.</span>act <span class="token operator">===</span> <span class="token string">'close'</span><span class="token punctuation">)</span>
+    <span class="token function">close</span><span class="token punctuation">(</span>worker<span class="token punctuation">,</span> message<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>在 queryServer 里，首先 创建 RoundRobinHandle 实例，然后调用 handle.add()。</p> <p>对于 address + port + addressType + fd + index 一样的 net.Server 实例，只创建一个 RoundRobinHandle 实例，并通过 handle.add() 将worker添加进去。</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">// master进程</span>
+<span class="token keyword">function</span> <span class="token function">queryServer</span><span class="token punctuation">(</span><span class="token parameter">worker<span class="token punctuation">,</span> message</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>  
+    <span class="token keyword">var</span> args <span class="token operator">=</span> <span class="token punctuation">[</span>message<span class="token punctuation">.</span>address<span class="token punctuation">,</span>
+                message<span class="token punctuation">.</span>port<span class="token punctuation">,</span>
+                message<span class="token punctuation">.</span>addressType<span class="token punctuation">,</span>
+                message<span class="token punctuation">.</span>fd<span class="token punctuation">,</span> <span class="token comment">// undefined</span>
+                message<span class="token punctuation">.</span>index<span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// 注意：对于同样的监听参数，index 是从0开始递增的整数</span>
+    <span class="token keyword">var</span> key <span class="token operator">=</span> args<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">':'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 例子：':3000:4::0'</span>
+    <span class="token keyword">var</span> handle <span class="token operator">=</span> handles<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>handle <span class="token operator">===</span> <span class="token keyword">undefined</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>      
+      <span class="token keyword">var</span> constructor <span class="token operator">=</span> RoundRobinHandle<span class="token punctuation">;</span>
+
+      <span class="token comment">// 创建新的handle，并挂载到 handles 上</span>
+      <span class="token comment">// 这里的 constructor 为 RoundRobinHandle</span>
+      handles<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> handle <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">constructor</span><span class="token punctuation">(</span>key<span class="token punctuation">,</span>
+                                              message<span class="token punctuation">.</span>address<span class="token punctuation">,</span>
+                                              message<span class="token punctuation">.</span>port<span class="token punctuation">,</span>
+                                              message<span class="token punctuation">.</span>addressType<span class="token punctuation">,</span>
+                                              message<span class="token punctuation">.</span>fd<span class="token punctuation">,</span>
+                                              message<span class="token punctuation">.</span>flags<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>handle<span class="token punctuation">.</span>data<span class="token punctuation">)</span> handle<span class="token punctuation">.</span>data <span class="token operator">=</span> message<span class="token punctuation">.</span>data<span class="token punctuation">;</span>
+
+    <span class="token comment">// Set custom server data</span>
+    handle<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>worker<span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">errno<span class="token punctuation">,</span> reply<span class="token punctuation">,</span> handle</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      reply <span class="token operator">=</span> util<span class="token punctuation">.</span><span class="token function">_extend</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        errno<span class="token operator">:</span> errno<span class="token punctuation">,</span>
+        key<span class="token operator">:</span> key<span class="token punctuation">,</span>
+        ack<span class="token operator">:</span> message<span class="token punctuation">.</span>seq<span class="token punctuation">,</span>
+        data<span class="token operator">:</span> handles<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">.</span>data
+      <span class="token punctuation">}</span><span class="token punctuation">,</span> reply<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>errno<span class="token punctuation">)</span> <span class="token keyword">delete</span> handles<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">;</span>  <span class="token comment">// Gives other workers a chance to retry.</span>
+      <span class="token function">send</span><span class="token punctuation">(</span>worker<span class="token punctuation">,</span> reply<span class="token punctuation">,</span> handle<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+</code></pre></div><p>看下 RoundRobinHandle 的构造方法。创建了 net.Server 实例，并调用 server.listen() 方法（实际监听）。</p> <p>当 listening 事件触发，将 onconnection 事件覆盖掉，实现在多个worker中分发请求的逻辑。</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">// master进程</span>
+<span class="token keyword">function</span> <span class="token function">RoundRobinHandle</span><span class="token punctuation">(</span><span class="token parameter">key<span class="token punctuation">,</span> address<span class="token punctuation">,</span> port<span class="token punctuation">,</span> addressType<span class="token punctuation">,</span> fd</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>key <span class="token operator">=</span> key<span class="token punctuation">;</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>all <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>free <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>handles <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>handle <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>server <span class="token operator">=</span> net<span class="token punctuation">.</span><span class="token function">createServer</span><span class="token punctuation">(</span>assert<span class="token punctuation">.</span>fail<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>fd <span class="token operator">&gt;=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>server<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token punctuation">{</span> fd<span class="token operator">:</span> fd <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>port <span class="token operator">&gt;=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>server<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span>port<span class="token punctuation">,</span> address<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">else</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>server<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span>address<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// UNIX socket path.</span>
+
+  <span class="token keyword">this</span><span class="token punctuation">.</span>server<span class="token punctuation">.</span><span class="token function">once</span><span class="token punctuation">(</span><span class="token string">'listening'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>handle <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>server<span class="token punctuation">.</span>_handle<span class="token punctuation">;</span>
+    <span class="token comment">// 监听 connection 事件，当用户请求进来时，通过 this.distribute() 分发请求到各个worker</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>handle<span class="token punctuation">.</span><span class="token function-variable function">onconnection</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span> handle</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">distribute</span><span class="token punctuation">(</span>err<span class="token punctuation">,</span> handle<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>server<span class="token punctuation">.</span>_handle <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>server <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>注意，前面调用了 handle.add() 方法，如下所示</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">// master进程</span>
+<span class="token comment">// Set custom server data</span>
+handle<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>worker<span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">errno<span class="token punctuation">,</span> reply<span class="token punctuation">,</span> handle</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  reply <span class="token operator">=</span> util<span class="token punctuation">.</span><span class="token function">_extend</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    errno<span class="token operator">:</span> errno<span class="token punctuation">,</span>
+    key<span class="token operator">:</span> key<span class="token punctuation">,</span>
+    ack<span class="token operator">:</span> message<span class="token punctuation">.</span>seq<span class="token punctuation">,</span>
+    data<span class="token operator">:</span> handles<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">.</span>data
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> reply<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>errno<span class="token punctuation">)</span> <span class="token keyword">delete</span> handles<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">;</span>  <span class="token comment">// Gives other workers a chance to retry.</span>
+  <span class="token function">send</span><span class="token punctuation">(</span>worker<span class="token punctuation">,</span> reply<span class="token punctuation">,</span> handle<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>看下方法定义（忽略非主要逻辑）：</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">// master进程</span>
+<span class="token class-name">RoundRobinHandle</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function-variable function">add</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">worker<span class="token punctuation">,</span> send</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 存储worker的引用</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>all<span class="token punctuation">[</span>worker<span class="token punctuation">.</span>id<span class="token punctuation">]</span> <span class="token operator">=</span> worker<span class="token punctuation">;</span>
+
+  <span class="token comment">// 当listening事件触发，done 被调用（注意，在 RoundRobinHandle 构造方法里也监听了 listening）</span>
+  <span class="token keyword">const</span> <span class="token function-variable function">done</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>handle<span class="token punctuation">.</span>getsockname<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// osx 10.13.1，node 8.9.3，跑这个分支</span>
+      <span class="token keyword">var</span> out <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>handle<span class="token punctuation">.</span><span class="token function">getsockname</span><span class="token punctuation">(</span>out<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment">// 这里的 send 函数名比较有歧义，其实是 handle.add(worker, callback) 中的 callback</span>
+      <span class="token comment">// TODO(bnoordhuis) Check err.</span>
+      <span class="token function">send</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> sockname<span class="token operator">:</span> out <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      <span class="token function">send</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// UNIX socket.</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">handoff</span><span class="token punctuation">(</span>worker<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// In case there are connections pending.</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// Still busy binding.</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>server<span class="token punctuation">.</span><span class="token function">once</span><span class="token punctuation">(</span><span class="token string">'listening'</span><span class="token punctuation">,</span> done<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><p>当 listening 事件触发，下面方法被调用。同样的，最终被 sendHelper 封装了一遍</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">// master进程</span>
+<span class="token comment">// error: null</span>
+<span class="token comment">// reply: {}</span>
+<span class="token comment">// handle: null </span>
+<span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">errno<span class="token punctuation">,</span> reply<span class="token punctuation">,</span> handle</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  reply <span class="token operator">=</span> util<span class="token punctuation">.</span><span class="token function">_extend</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    errno<span class="token operator">:</span> errno<span class="token punctuation">,</span>
+    key<span class="token operator">:</span> key<span class="token punctuation">,</span>
+    ack<span class="token operator">:</span> message<span class="token punctuation">.</span>seq<span class="token punctuation">,</span>
+    data<span class="token operator">:</span> handles<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">.</span>data
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> reply<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>errno<span class="token punctuation">)</span> <span class="token keyword">delete</span> handles<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">;</span>  <span class="token comment">// Gives other workers a chance to retry.</span>
+  <span class="token punctuation">{</span><span class="token string">&quot;errno&quot;</span><span class="token operator">:</span><span class="token keyword">null</span><span class="token punctuation">,</span><span class="token string">&quot;key&quot;</span><span class="token operator">:</span><span class="token string">&quot;:3000:4::0&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;ack&quot;</span><span class="token operator">:</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token string">&quot;data&quot;</span><span class="token operator">:</span><span class="token keyword">null</span><span class="token punctuation">,</span><span class="token string">&quot;sockname&quot;</span><span class="token operator">:</span><span class="token punctuation">{</span><span class="token string">&quot;address&quot;</span><span class="token operator">:</span><span class="token string">&quot;::&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;family&quot;</span><span class="token operator">:</span><span class="token string">&quot;IPv6&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;port&quot;</span><span class="token operator">:</span><span class="token number">3000</span><span class="token punctuation">}</span><span class="token punctuation">}</span>
+  <span class="token function">send</span><span class="token punctuation">(</span>worker<span class="token punctuation">,</span> reply<span class="token punctuation">,</span> handle<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>经过 sendHelper 的封装，worker.process.send(message)，message 内容如下。注意，此时 ack === 1。</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">// master进程</span>
+<span class="token punctuation">{</span>
+  <span class="token string">&quot;cmd&quot;</span><span class="token operator">:</span> <span class="token string">&quot;NODE_CLUSTER&quot;</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;sockname&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token string">&quot;address&quot;</span><span class="token operator">:</span> <span class="token string">&quot;::&quot;</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;family&quot;</span><span class="token operator">:</span> <span class="token string">&quot;IPv6&quot;</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;port&quot;</span><span class="token operator">:</span> <span class="token number">3000</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;data&quot;</span><span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;ack&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;key&quot;</span><span class="token operator">:</span> <span class="token string">&quot;:3000:4::0&quot;</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;errno&quot;</span><span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;seq&quot;</span><span class="token operator">:</span> <span class="token number">0</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>当上面 message 被发出时，worker 进程的 internalMessage 事件触发。（worker进程 的internalMessage 事件是在 node_bootstrap阶段监听的，这里容易忽略）</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">// worker进程</span>
+cluster<span class="token punctuation">.</span><span class="token function-variable function">_setupWorker</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">var</span> worker <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Worker</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    id<span class="token operator">:</span> <span class="token operator">+</span>process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">NODE_UNIQUE_ID</span> <span class="token operator">|</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    process<span class="token operator">:</span> process<span class="token punctuation">,</span>
+    state<span class="token operator">:</span> <span class="token string">'online'</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  cluster<span class="token punctuation">.</span>worker <span class="token operator">=</span> worker<span class="token punctuation">;</span>
+  process<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'internalMessage'</span><span class="token punctuation">,</span> <span class="token function">internal</span><span class="token punctuation">(</span>worker<span class="token punctuation">,</span> onmessage<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><p>如下所示，当 message.ack 存在时，callbacks[message.ack] 被调用。</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">// worker进程</span>
+<span class="token keyword">function</span> <span class="token function">internal</span><span class="token punctuation">(</span><span class="token parameter">worker<span class="token punctuation">,</span> cb</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">message<span class="token punctuation">,</span> handle</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>message<span class="token punctuation">.</span>cmd <span class="token operator">!==</span> <span class="token string">'NODE_CLUSTER'</span><span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> fn <span class="token operator">=</span> cb<span class="token punctuation">;</span>
+    <span class="token comment">// 此时，message.ack === 1</span>
+    <span class="token comment">// callbacks[message.ack] 是 _getServer 的回调</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>message<span class="token punctuation">.</span>ack <span class="token operator">!==</span> <span class="token keyword">undefined</span> <span class="token operator">&amp;&amp;</span> callbacks<span class="token punctuation">[</span>message<span class="token punctuation">.</span>ack<span class="token punctuation">]</span> <span class="token operator">!==</span> <span class="token keyword">undefined</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      fn <span class="token operator">=</span> callbacks<span class="token punctuation">[</span>message<span class="token punctuation">.</span>ack<span class="token punctuation">]</span><span class="token punctuation">;</span>
+      <span class="token keyword">delete</span> callbacks<span class="token punctuation">[</span>message<span class="token punctuation">.</span>ack<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">fn</span><span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>worker<span class="token punctuation">,</span> arguments<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>也就是下面的回调。</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">// worker进程</span>
+<span class="token comment">// obj is a net#Server or a dgram#Socket object.</span>
+cluster<span class="token punctuation">.</span><span class="token function-variable function">_getServer</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">obj<span class="token punctuation">,</span> options<span class="token punctuation">,</span> cb</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+  <span class="token comment">// 忽略部分代码</span>
+  <span class="token keyword">const</span> message <span class="token operator">=</span> util<span class="token punctuation">.</span><span class="token function">_extend</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    act<span class="token operator">:</span> <span class="token string">'queryServer'</span><span class="token punctuation">,</span>
+    index<span class="token operator">:</span> indexes<span class="token punctuation">[</span>indexesKey<span class="token punctuation">]</span><span class="token punctuation">,</span>
+    data<span class="token operator">:</span> <span class="token keyword">null</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> options<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">/* 
+  注意：就是这里的回调】
+  reply: {
+    &quot;cmd&quot;: &quot;NODE_CLUSTER&quot;,
+    &quot;sockname&quot;: {
+      &quot;address&quot;: &quot;::&quot;,
+      &quot;family&quot;: &quot;IPv6&quot;,
+      &quot;port&quot;: 3000
+    },
+    &quot;data&quot;: null,
+    &quot;ack&quot;: 1,
+    &quot;key&quot;: &quot;:3000:4::0&quot;,
+    &quot;errno&quot;: null,
+    &quot;seq&quot;: 0
+  }
+  handle：undefined
+  */</span>
+  <span class="token function">send</span><span class="token punctuation">(</span>message<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">reply<span class="token punctuation">,</span> handle</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>handle<span class="token punctuation">)</span>
+      <span class="token function">shared</span><span class="token punctuation">(</span>reply<span class="token punctuation">,</span> handle<span class="token punctuation">,</span> indexesKey<span class="token punctuation">,</span> cb<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// Shared listen socket.</span>
+    <span class="token keyword">else</span>
+      <span class="token comment">// 这里被调用</span>
+      <span class="token function">rr</span><span class="token punctuation">(</span>reply<span class="token punctuation">,</span> indexesKey<span class="token punctuation">,</span> cb<span class="token punctuation">)</span><span class="token punctuation">;</span>              <span class="token comment">// Round-robin.</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><p>下面是 rr 方法的定义。</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">// worker进程</span>
+<span class="token comment">// message： {&quot;cmd&quot;:&quot;NODE_CLUSTER&quot;,&quot;sockname&quot;:{&quot;address&quot;:&quot;::&quot;,&quot;family&quot;:&quot;IPv6&quot;,&quot;port&quot;:3000},&quot;data&quot;:null,&quot;ack&quot;:1,&quot;key&quot;:&quot;:3000:4::0&quot;,&quot;errno&quot;:null,&quot;seq&quot;:0}</span>
+<span class="token comment">// indexsKey: &quot;:3000:4:&quot;</span>
+<span class="token comment">// cb: _getServer 的回调</span>
+<span class="token comment">// Round-robin. Master distributes handles across workers.</span>
+<span class="token keyword">function</span> <span class="token function">rr</span><span class="token punctuation">(</span><span class="token parameter">message<span class="token punctuation">,</span> indexesKey<span class="token punctuation">,</span> cb</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>message<span class="token punctuation">.</span>errno<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> <span class="token function">cb</span><span class="token punctuation">(</span>message<span class="token punctuation">.</span>errno<span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">var</span> key <span class="token operator">=</span> message<span class="token punctuation">.</span>key<span class="token punctuation">;</span>
+  <span class="token keyword">function</span> <span class="token function">listen</span><span class="token punctuation">(</span><span class="token parameter">backlog</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// TODO(bnoordhuis) Send a message to the master that tells it to</span>
+    <span class="token comment">// update the backlog size. The actual backlog should probably be</span>
+    <span class="token comment">// the largest requested size by any worker.</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">function</span> <span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// lib/net.js treats server._handle.close() as effectively synchronous.</span>
+    <span class="token comment">// That means there is a time window between the call to close() and</span>
+    <span class="token comment">// the ack by the master process in which we can still receive handles.</span>
+    <span class="token comment">// onconnection() below handles that by sending those handles back to</span>
+    <span class="token comment">// the master.</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>key <span class="token operator">===</span> <span class="token keyword">undefined</span><span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token function">send</span><span class="token punctuation">(</span><span class="token punctuation">{</span> act<span class="token operator">:</span> <span class="token string">'close'</span><span class="token punctuation">,</span> key<span class="token operator">:</span> key <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">delete</span> handles<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">delete</span> indexes<span class="token punctuation">[</span>indexesKey<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    key <span class="token operator">=</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">function</span> <span class="token function">getsockname</span><span class="token punctuation">(</span><span class="token parameter">out</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>key<span class="token punctuation">)</span> util<span class="token punctuation">.</span><span class="token function">_extend</span><span class="token punctuation">(</span>out<span class="token punctuation">,</span> message<span class="token punctuation">.</span>sockname<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// XXX(bnoordhuis) Probably no point in implementing ref() and unref()</span>
+  <span class="token comment">// because the control channel is going to keep the worker alive anyway.</span>
+  <span class="token keyword">function</span> <span class="token function">ref</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">function</span> <span class="token function">unref</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// Faux handle. Mimics a TCPWrap with just enough fidelity to get away</span>
+  <span class="token comment">// with it. Fools net.Server into thinking that it's backed by a real</span>
+  <span class="token comment">// handle.</span>
+  <span class="token keyword">var</span> handle <span class="token operator">=</span> <span class="token punctuation">{</span>
+    close<span class="token operator">:</span> close<span class="token punctuation">,</span>
+    listen<span class="token operator">:</span> listen<span class="token punctuation">,</span>
+    ref<span class="token operator">:</span> ref<span class="token punctuation">,</span>
+    unref<span class="token operator">:</span> unref<span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>message<span class="token punctuation">.</span>sockname<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    handle<span class="token punctuation">.</span>getsockname <span class="token operator">=</span> getsockname<span class="token punctuation">;</span>  <span class="token comment">// TCP handles only.</span>
+  <span class="token punctuation">}</span>
+  
+  handles<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> handle<span class="token punctuation">;</span>
+  <span class="token function">cb</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> handle<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 终于调用 cb 了。。。</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>然后，下面的回调函数被调用：</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">// worker进程</span>
+<span class="token keyword">function</span> <span class="token function">cb</span><span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span> handle</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// err：0</span>
+  <span class="token comment">// handle: {close: fn, listen: fn, getsockname: fn, ref: fn, unref: fn}</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>err <span class="token operator">===</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> port <span class="token operator">&gt;</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> handle<span class="token punctuation">.</span>getsockname<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> out <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    err <span class="token operator">=</span> handle<span class="token punctuation">.</span><span class="token function">getsockname</span><span class="token punctuation">(</span>out<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>err <span class="token operator">===</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> port <span class="token operator">!==</span> out<span class="token punctuation">.</span>port<span class="token punctuation">)</span>
+      err <span class="token operator">=</span> uv<span class="token punctuation">.</span><span class="token constant">UV_EADDRINUSE</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  self<span class="token punctuation">.</span>_handle <span class="token operator">=</span> handle<span class="token punctuation">;</span> <span class="token comment">// 将 handle 赋给 net.Server 实例</span>
+  self<span class="token punctuation">.</span><span class="token function">_listen2</span><span class="token punctuation">(</span>address<span class="token punctuation">,</span> port<span class="token punctuation">,</span> addressType<span class="token punctuation">,</span> backlog<span class="token punctuation">,</span> fd<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 调用 _listen2 方法</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>看下此时 _listen2 做了什么。主要是抛出 listening 事件，以及 添加 onconnection 监听。</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">// worker进程</span>
+<span class="token class-name">Server</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function-variable function">_listen2</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">address<span class="token punctuation">,</span> port<span class="token punctuation">,</span> addressType<span class="token punctuation">,</span> backlog<span class="token punctuation">,</span> fd</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+  <span class="token comment">// If there is not yet a handle, we need to create one and bind.</span>
+  <span class="token comment">// In the case of a server sent via IPC, we don't need to do this.</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>_handle<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">debug</span><span class="token punctuation">(</span><span class="token string">'_listen2: have a handle already'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> 
+
+  <span class="token keyword">this</span><span class="token punctuation">.</span>_handle<span class="token punctuation">.</span>onconnection <span class="token operator">=</span> onconnection<span class="token punctuation">;</span> <span class="token comment">// onconnect 回调</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>_handle<span class="token punctuation">.</span>owner <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">var</span> err <span class="token operator">=</span> <span class="token function">_listen</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>_handle<span class="token punctuation">,</span> backlog<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// generate connection key, this should be unique to the connection</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>_connectionKey <span class="token operator">=</span> addressType <span class="token operator">+</span> <span class="token string">':'</span> <span class="token operator">+</span> address <span class="token operator">+</span> <span class="token string">':'</span> <span class="token operator">+</span> port<span class="token punctuation">;</span>
+
+  process<span class="token punctuation">.</span><span class="token function">nextTick</span><span class="token punctuation">(</span>emitListeningNT<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><p>前面说过，在主进程里，创建了 net.Server 实例，并对端口进行实际的监听。再来回顾这段代码</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">// master进程</span>
+<span class="token comment">// Start a round-robin server. Master accepts connections and distributes</span>
+<span class="token comment">// them over the workers.</span>
+<span class="token keyword">function</span> <span class="token function">RoundRobinHandle</span><span class="token punctuation">(</span><span class="token parameter">key<span class="token punctuation">,</span> address<span class="token punctuation">,</span> port<span class="token punctuation">,</span> addressType<span class="token punctuation">,</span> fd</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 忽略非重点代码</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>server <span class="token operator">=</span> net<span class="token punctuation">.</span><span class="token function">createServer</span><span class="token punctuation">(</span>assert<span class="token punctuation">.</span>fail<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>server<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span>port<span class="token punctuation">,</span> address<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 注意这里的监听</span>
+
+  <span class="token keyword">this</span><span class="token punctuation">.</span>server<span class="token punctuation">.</span><span class="token function">once</span><span class="token punctuation">(</span><span class="token string">'listening'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>handle <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>server<span class="token punctuation">.</span>_handle<span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>handle<span class="token punctuation">.</span><span class="token function-variable function">onconnection</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span> handle</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">distribute</span><span class="token punctuation">(</span>err<span class="token punctuation">,</span> handle<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>server<span class="token punctuation">.</span>_handle <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>server <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>监听调用的是 net 模块中如下函数：</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">// master进程</span>
+self<span class="token punctuation">.</span><span class="token function">_listen2</span><span class="token punctuation">(</span>address<span class="token punctuation">,</span> port<span class="token punctuation">,</span> addressType<span class="token punctuation">,</span> backlog<span class="token punctuation">,</span> fd<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">// master进程</span>
+<span class="token class-name">Server</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function-variable function">_listen2</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">address<span class="token punctuation">,</span> port<span class="token punctuation">,</span> addressType<span class="token punctuation">,</span> backlog<span class="token punctuation">,</span> fd</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+  <span class="token comment">// If there is not yet a handle, we need to create one and bind.</span>
+  <span class="token comment">// In the case of a server sent via IPC, we don't need to do this.</span>
+  <span class="token comment">// 此时，this._handle 是 null（初始化状态），于是走第二个分支</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>_handle<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">debug</span><span class="token punctuation">(</span><span class="token string">'_listen2: have a handle already'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token function">debug</span><span class="token punctuation">(</span><span class="token string">'_listen2: create a handle'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">var</span> rval <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>address <span class="token operator">&amp;&amp;</span> <span class="token keyword">typeof</span> fd <span class="token operator">!==</span> <span class="token string">'number'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      rval <span class="token operator">=</span> <span class="token function">createServerHandle</span><span class="token punctuation">(</span><span class="token string">'::'</span><span class="token punctuation">,</span> port<span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> fd<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> rval <span class="token operator">===</span> <span class="token string">'number'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        rval <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+        address <span class="token operator">=</span> <span class="token string">'0.0.0.0'</span><span class="token punctuation">;</span>
+        addressType <span class="token operator">=</span> <span class="token number">4</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        address <span class="token operator">=</span> <span class="token string">'::'</span><span class="token punctuation">;</span>
+        addressType <span class="token operator">=</span> <span class="token number">6</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// rval: {&quot;reading&quot;:false,&quot;owner&quot;:null,&quot;onread&quot;:null,&quot;onconnection&quot;:null,&quot;writeQueueSize&quot;:0}</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>rval <span class="token operator">===</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+      <span class="token comment">// 重点是这行代码，在这里面创建 TCP 实例，并进行监听</span>
+      <span class="token comment">// fd: undefined</span>
+      <span class="token comment">// address: ::''</span>
+      rval <span class="token operator">=</span> <span class="token function">createServerHandle</span><span class="token punctuation">(</span>address<span class="token punctuation">,</span> port<span class="token punctuation">,</span> addressType<span class="token punctuation">,</span> fd<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> rval <span class="token operator">===</span> <span class="token string">'number'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">var</span> error <span class="token operator">=</span> <span class="token function">exceptionWithHostPort</span><span class="token punctuation">(</span>rval<span class="token punctuation">,</span> <span class="token string">'listen'</span><span class="token punctuation">,</span> address<span class="token punctuation">,</span> port<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      process<span class="token punctuation">.</span><span class="token function">nextTick</span><span class="token punctuation">(</span>emitErrorNT<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">,</span> error<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>_handle <span class="token operator">=</span> rval<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">this</span><span class="token punctuation">.</span>_handle<span class="token punctuation">.</span>onconnection <span class="token operator">=</span> onconnection<span class="token punctuation">;</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>_handle<span class="token punctuation">.</span>owner <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">var</span> err <span class="token operator">=</span> <span class="token function">_listen</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>_handle<span class="token punctuation">,</span> backlog<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> ex <span class="token operator">=</span> <span class="token function">exceptionWithHostPort</span><span class="token punctuation">(</span>err<span class="token punctuation">,</span> <span class="token string">'listen'</span><span class="token punctuation">,</span> address<span class="token punctuation">,</span> port<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>_handle<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>_handle <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+    process<span class="token punctuation">.</span><span class="token function">nextTick</span><span class="token punctuation">(</span>emitErrorNT<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">,</span> ex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// generate connection key, this should be unique to the connection</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>_connectionKey <span class="token operator">=</span> addressType <span class="token operator">+</span> <span class="token string">':'</span> <span class="token operator">+</span> address <span class="token operator">+</span> <span class="token string">':'</span> <span class="token operator">+</span> port<span class="token punctuation">;</span>
+
+  <span class="token comment">// unref the handle if the server was unref'ed prior to listening</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>_unref<span class="token punctuation">)</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">unref</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  process<span class="token punctuation">.</span><span class="token function">nextTick</span><span class="token punctuation">(</span>emitListeningNT<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><p>主要逻辑：创建 TCP 实例，绑定端口、IP，并返回 handle。</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">//master进程</span>
+<span class="token keyword">function</span> <span class="token function">createServerHandle</span><span class="token punctuation">(</span><span class="token parameter">address<span class="token punctuation">,</span> port<span class="token punctuation">,</span> addressType<span class="token punctuation">,</span> fd</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">var</span> err <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token comment">// assign handle in listen, and clean up if bind or listen fails</span>
+  <span class="token keyword">var</span> handle<span class="token punctuation">;</span>
+
+  <span class="token keyword">var</span> isTCP <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+  
+  handle <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">TCP</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  isTCP <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>address <span class="token operator">||</span> port <span class="token operator">||</span> isTCP<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">debug</span><span class="token punctuation">(</span><span class="token string">'bind to '</span> <span class="token operator">+</span> <span class="token punctuation">(</span>address <span class="token operator">||</span> <span class="token string">'anycast'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>address<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// Try binding to ipv6 first</span>
+      err <span class="token operator">=</span> handle<span class="token punctuation">.</span><span class="token function">bind6</span><span class="token punctuation">(</span><span class="token string">'::'</span><span class="token punctuation">,</span> port<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        handle<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// Fallback to ipv4</span>
+        <span class="token keyword">return</span> <span class="token function">createServerHandle</span><span class="token punctuation">(</span><span class="token string">'0.0.0.0'</span><span class="token punctuation">,</span> port<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>addressType <span class="token operator">===</span> <span class="token number">6</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      err <span class="token operator">=</span> handle<span class="token punctuation">.</span><span class="token function">bind6</span><span class="token punctuation">(</span>address<span class="token punctuation">,</span> port<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      err <span class="token operator">=</span> <span class="token function">handle</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span>address<span class="token punctuation">,</span> port<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    handle<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> err<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">return</span> handle<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>server._handle 初始化完成，开始监听后，触发 listening 事件。此时，RoundRobinHandle 中的回调函数被调用。</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">// master进程</span>
+<span class="token keyword">this</span><span class="token punctuation">.</span>server<span class="token punctuation">.</span><span class="token function">once</span><span class="token punctuation">(</span><span class="token string">'listening'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 将 this.server._handle 赋值给 this.handle</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>handle <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>server<span class="token punctuation">.</span>_handle<span class="token punctuation">;</span>
+  <span class="token comment">// 覆盖 this.handle.onconnection，以达到请求分发的目的</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>handle<span class="token punctuation">.</span><span class="token function-variable function">onconnection</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span> handle</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">distribute</span><span class="token punctuation">(</span>err<span class="token punctuation">,</span> handle<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// 将server._handle 设置为null</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>server<span class="token punctuation">.</span>_handle <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+  <span class="token comment">// 将this.server 设置为null（这里只需要 handle 就够了）</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>server <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>经过上面的复杂流程，最终的结果是：</p> <ol><li>master 进程中创建了 net.Server 实例A，并对来自特定端口的请求进行监听。</li> <li>worker 进程中创建了 net.Server 实例B。</li> <li>当新连接创建时，实例A 将请求分发给实例B。（如果有多个worker进程，master进程会按照特定算法进行分发）</li></ol> <h2 id="请求分发源码分析"><a href="#请求分发源码分析" class="header-anchor">#</a> 请求分发源码分析</h2> <p>首先，当连接请求进来时，调用 this.distribute(err, handle);</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">// master进程</span>
+<span class="token keyword">this</span><span class="token punctuation">.</span>handle<span class="token punctuation">.</span><span class="token function-variable function">onconnection</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span> handle</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">distribute</span><span class="token punctuation">(</span>err<span class="token punctuation">,</span> handle<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>看下distribute的实现。主要做了两件事情：</p> <ol><li>将 handle 加入待处理队列。</li> <li>取得第一个空闲的worker，如果存在，就调用 this.handoff(worker); 处理请求。</li></ol> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">// master进程</span>
+<span class="token class-name">RoundRobinHandle</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function-variable function">distribute</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span> handle</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 将 handle 加入 handles 队列，该队列里是待处理的请求对应的handle。</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>handles<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>handle<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// 取第一个空闲的worker</span>
+  <span class="token keyword">var</span> worker <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>free<span class="token punctuation">.</span><span class="token function">shift</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// 如果有空闲的worker</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>worker<span class="token punctuation">)</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">handoff</span><span class="token punctuation">(</span>worker<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><p>看下 handoff(worker) 的实现。</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">// master进程</span>
+<span class="token class-name">RoundRobinHandle</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function-variable function">handoff</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">worker</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>worker<span class="token punctuation">.</span>id <span class="token keyword">in</span> <span class="token keyword">this</span><span class="token punctuation">.</span>all <span class="token operator">===</span> <span class="token boolean">false</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span><span class="token punctuation">;</span>  <span class="token comment">// Worker is closing (or has closed) the server.</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">// 获取第一个待处理的请求</span>
+  <span class="token keyword">var</span> handle <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>handles<span class="token punctuation">.</span><span class="token function">shift</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>handle <span class="token operator">===</span> <span class="token keyword">undefined</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>free<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>worker<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// Add to ready queue again.</span>
+    <span class="token keyword">return</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">var</span> message <span class="token operator">=</span> <span class="token punctuation">{</span> act<span class="token operator">:</span> <span class="token string">'newconn'</span><span class="token punctuation">,</span> key<span class="token operator">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>key <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// 向worker进程发送消息</span>
+  <span class="token comment">// message：{ act: 'newconn', key: this.key }</span>
+  <span class="token function">sendHelper</span><span class="token punctuation">(</span>worker<span class="token punctuation">.</span>process<span class="token punctuation">,</span> message<span class="token punctuation">,</span> handle<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">reply</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 当 worker进程 收到消息后，ack回应，调用 handle.close() </span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>reply<span class="token punctuation">.</span>accepted<span class="token punctuation">)</span>
+      handle<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">else</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">distribute</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> handle<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// Worker is shutting down. Send to another.</span>
+    <span class="token comment">// 再次调用 handoff(worker)。有可能前面已经有一堆的待处理请求，因此检查下还有没有请求需要处理</span>
+    <span class="token comment">// 如有，已经空闲出来的worker可以接着处理请求</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">handoff</span><span class="token punctuation">(</span>worker<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/node-learning-notes/notes/advance/-5分钟入门非对称加密用法.html" class="prev">
+        5分钟入门非对称加密用法
+      </a></span> <span class="next"><a href="/node-learning-notes/notes/advance/-cookie_parser深入.html">
+        cookie_parser深入
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/node-learning-notes/assets/js/app.06995101.js" defer></script><script src="/node-learning-notes/assets/js/4.cbb566af.js" defer></script><script src="/node-learning-notes/assets/js/37.8351c418.js" defer></script>
+  </body>
+</html>

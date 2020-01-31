@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>webpack4 环境搭建 | Node.js学习指南</title>
+    <meta name="description" content="Node.js笔记系统整理">
+    <meta name="generator" content="VuePress 1.3.0">
+    <link rel="icon" href="/node-learning-notes/logo.png">
+  <link rel="manifest" href="/node-learning-notes/manifest.json">
+  <meta name="theme-color" content="#3eaf7c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="/node-learning-notes/icons/apple-touch-icon-152x152.png">
+  <link rel="mask-icon" href="/node-learning-notes/icons/safari-pinned-tab.svg" color="#3eaf7c">
+  <meta name="msapplication-TileImage" content="/icons/msapplication-icon-144x144.png">
+  <meta name="msapplication-TileColor" content="#000000">
+  <meta name="apple-mobile-web-app-status-bar-style">
+    
+    <link rel="preload" href="/node-learning-notes/assets/css/0.styles.04d71374.css" as="style"><link rel="preload" href="/node-learning-notes/assets/js/app.06995101.js" as="script"><link rel="preload" href="/node-learning-notes/assets/js/4.cbb566af.js" as="script"><link rel="preload" href="/node-learning-notes/assets/js/67.05e9a058.js" as="script"><link rel="prefetch" href="/node-learning-notes/assets/js/10.1df831e5.js"><link rel="prefetch" href="/node-learning-notes/assets/js/100.faed81e1.js"><link rel="prefetch" href="/node-learning-notes/assets/js/101.4ca9de43.js"><link rel="prefetch" href="/node-learning-notes/assets/js/102.bed33a4e.js"><link rel="prefetch" href="/node-learning-notes/assets/js/103.47cfeeb4.js"><link rel="prefetch" href="/node-learning-notes/assets/js/104.99382f62.js"><link rel="prefetch" href="/node-learning-notes/assets/js/105.a09c57ad.js"><link rel="prefetch" href="/node-learning-notes/assets/js/106.e0e65ae5.js"><link rel="prefetch" href="/node-learning-notes/assets/js/107.006157e7.js"><link rel="prefetch" href="/node-learning-notes/assets/js/11.6d248a1f.js"><link rel="prefetch" href="/node-learning-notes/assets/js/12.089b9acc.js"><link rel="prefetch" href="/node-learning-notes/assets/js/13.7503e5c6.js"><link rel="prefetch" href="/node-learning-notes/assets/js/14.ea26514e.js"><link rel="prefetch" href="/node-learning-notes/assets/js/15.6f7e5a72.js"><link rel="prefetch" href="/node-learning-notes/assets/js/16.15f31946.js"><link rel="prefetch" href="/node-learning-notes/assets/js/17.546f352d.js"><link rel="prefetch" href="/node-learning-notes/assets/js/18.43cadce8.js"><link rel="prefetch" href="/node-learning-notes/assets/js/19.20c00e37.js"><link rel="prefetch" href="/node-learning-notes/assets/js/20.d4bd9d39.js"><link rel="prefetch" href="/node-learning-notes/assets/js/21.147d3198.js"><link rel="prefetch" href="/node-learning-notes/assets/js/22.822af822.js"><link rel="prefetch" href="/node-learning-notes/assets/js/23.ad0f4e46.js"><link rel="prefetch" href="/node-learning-notes/assets/js/24.4ed1364a.js"><link rel="prefetch" href="/node-learning-notes/assets/js/25.e8be0e71.js"><link rel="prefetch" href="/node-learning-notes/assets/js/26.a4b68f4e.js"><link rel="prefetch" href="/node-learning-notes/assets/js/27.eaeaac83.js"><link rel="prefetch" href="/node-learning-notes/assets/js/28.ce8ab57d.js"><link rel="prefetch" href="/node-learning-notes/assets/js/29.0b3e19ed.js"><link rel="prefetch" href="/node-learning-notes/assets/js/30.409d36e7.js"><link rel="prefetch" href="/node-learning-notes/assets/js/31.dc762526.js"><link rel="prefetch" href="/node-learning-notes/assets/js/32.05ff8283.js"><link rel="prefetch" href="/node-learning-notes/assets/js/33.b095bc5b.js"><link rel="prefetch" href="/node-learning-notes/assets/js/34.ec57608e.js"><link rel="prefetch" href="/node-learning-notes/assets/js/35.5f3ea3ae.js"><link rel="prefetch" href="/node-learning-notes/assets/js/36.ef51b036.js"><link rel="prefetch" href="/node-learning-notes/assets/js/37.8351c418.js"><link rel="prefetch" href="/node-learning-notes/assets/js/38.a20ee99d.js"><link rel="prefetch" href="/node-learning-notes/assets/js/39.88094c54.js"><link rel="prefetch" href="/node-learning-notes/assets/js/40.084cc24a.js"><link rel="prefetch" href="/node-learning-notes/assets/js/41.ceec190d.js"><link rel="prefetch" href="/node-learning-notes/assets/js/42.310c61ee.js"><link rel="prefetch" href="/node-learning-notes/assets/js/43.5b70b2d9.js"><link rel="prefetch" href="/node-learning-notes/assets/js/44.060a5dcd.js"><link rel="prefetch" href="/node-learning-notes/assets/js/45.8363b81b.js"><link rel="prefetch" href="/node-learning-notes/assets/js/46.4397f3e0.js"><link rel="prefetch" href="/node-learning-notes/assets/js/47.2ea413fc.js"><link rel="prefetch" href="/node-learning-notes/assets/js/48.aa2c07fb.js"><link rel="prefetch" href="/node-learning-notes/assets/js/49.14a61d03.js"><link rel="prefetch" href="/node-learning-notes/assets/js/5.36c9e133.js"><link rel="prefetch" href="/node-learning-notes/assets/js/50.eb271fd9.js"><link rel="prefetch" href="/node-learning-notes/assets/js/51.bc775c5f.js"><link rel="prefetch" href="/node-learning-notes/assets/js/52.fa54eb4e.js"><link rel="prefetch" href="/node-learning-notes/assets/js/53.1ee619d8.js"><link rel="prefetch" href="/node-learning-notes/assets/js/54.5d6b9ae6.js"><link rel="prefetch" href="/node-learning-notes/assets/js/55.1d902dc8.js"><link rel="prefetch" href="/node-learning-notes/assets/js/56.35cf11c3.js"><link rel="prefetch" href="/node-learning-notes/assets/js/57.a9d87e28.js"><link rel="prefetch" href="/node-learning-notes/assets/js/58.002141b4.js"><link rel="prefetch" href="/node-learning-notes/assets/js/59.b81489d4.js"><link rel="prefetch" href="/node-learning-notes/assets/js/6.58217116.js"><link rel="prefetch" href="/node-learning-notes/assets/js/60.c35e60a8.js"><link rel="prefetch" href="/node-learning-notes/assets/js/61.f822b13d.js"><link rel="prefetch" href="/node-learning-notes/assets/js/62.485b4012.js"><link rel="prefetch" href="/node-learning-notes/assets/js/63.c7c2b6b5.js"><link rel="prefetch" href="/node-learning-notes/assets/js/64.5d43709b.js"><link rel="prefetch" href="/node-learning-notes/assets/js/65.b611bc8d.js"><link rel="prefetch" href="/node-learning-notes/assets/js/66.59d2a614.js"><link rel="prefetch" href="/node-learning-notes/assets/js/68.0b86b935.js"><link rel="prefetch" href="/node-learning-notes/assets/js/69.8c93eaf6.js"><link rel="prefetch" href="/node-learning-notes/assets/js/7.9ed243c7.js"><link rel="prefetch" href="/node-learning-notes/assets/js/70.177565f8.js"><link rel="prefetch" href="/node-learning-notes/assets/js/71.617d61d2.js"><link rel="prefetch" href="/node-learning-notes/assets/js/72.cda5cf3a.js"><link rel="prefetch" href="/node-learning-notes/assets/js/73.2201f15f.js"><link rel="prefetch" href="/node-learning-notes/assets/js/74.5aad0673.js"><link rel="prefetch" href="/node-learning-notes/assets/js/75.05e9ddf5.js"><link rel="prefetch" href="/node-learning-notes/assets/js/76.909eda7b.js"><link rel="prefetch" href="/node-learning-notes/assets/js/77.d9e10d0d.js"><link rel="prefetch" href="/node-learning-notes/assets/js/78.e3ab5082.js"><link rel="prefetch" href="/node-learning-notes/assets/js/79.6bea4726.js"><link rel="prefetch" href="/node-learning-notes/assets/js/8.5121c136.js"><link rel="prefetch" href="/node-learning-notes/assets/js/80.2b3a46e0.js"><link rel="prefetch" href="/node-learning-notes/assets/js/81.d8a2b86a.js"><link rel="prefetch" href="/node-learning-notes/assets/js/82.59884135.js"><link rel="prefetch" href="/node-learning-notes/assets/js/83.7dd235af.js"><link rel="prefetch" href="/node-learning-notes/assets/js/84.75f51e4b.js"><link rel="prefetch" href="/node-learning-notes/assets/js/85.6b0d363d.js"><link rel="prefetch" href="/node-learning-notes/assets/js/86.011fd32a.js"><link rel="prefetch" href="/node-learning-notes/assets/js/87.649522e0.js"><link rel="prefetch" href="/node-learning-notes/assets/js/88.d60b555e.js"><link rel="prefetch" href="/node-learning-notes/assets/js/89.b09d6659.js"><link rel="prefetch" href="/node-learning-notes/assets/js/9.c39e9c7d.js"><link rel="prefetch" href="/node-learning-notes/assets/js/90.bdd3e393.js"><link rel="prefetch" href="/node-learning-notes/assets/js/91.4c084abf.js"><link rel="prefetch" href="/node-learning-notes/assets/js/92.8751acf1.js"><link rel="prefetch" href="/node-learning-notes/assets/js/93.7c5d406d.js"><link rel="prefetch" href="/node-learning-notes/assets/js/94.9cbbda26.js"><link rel="prefetch" href="/node-learning-notes/assets/js/95.9d6d64b9.js"><link rel="prefetch" href="/node-learning-notes/assets/js/96.1f58d5ae.js"><link rel="prefetch" href="/node-learning-notes/assets/js/97.24de5796.js"><link rel="prefetch" href="/node-learning-notes/assets/js/98.81ff5119.js"><link rel="prefetch" href="/node-learning-notes/assets/js/99.047c4c86.js"><link rel="prefetch" href="/node-learning-notes/assets/js/vendors~docsearch.73734a07.js"><link rel="prefetch" href="/node-learning-notes/assets/js/vendors~notification.c14938e7.js">
+    <link rel="stylesheet" href="/node-learning-notes/assets/css/0.styles.04d71374.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/node-learning-notes/" class="home-link router-link-active"><!----> <span class="site-name">Node.js学习指南</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/poetries/node-learning-notes" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/poetries/node-learning-notes" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>基础篇</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/node-learning-notes/notes/base/01-环境搭建.html" class="sidebar-link">环境搭建</a></li><li><a href="/node-learning-notes/notes/base/02-node部署.html" class="sidebar-link">node部署</a></li><li><a href="/node-learning-notes/notes/base/03-基础应用.html" class="sidebar-link">基础应用</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>内置模块</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>进阶篇</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Express</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Koa2</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/node-learning-notes/notes/koa2/-1.0 koa2概览篇.html" class="sidebar-link">1.0 koa2概览篇</a></li><li><a href="/node-learning-notes/notes/koa2/-1.1 快速开始.html" class="sidebar-link">1.1 快速开始</a></li><li><a href="/node-learning-notes/notes/koa2/-1.2 async await使用.html" class="sidebar-link">1.2 async await使用</a></li><li><a href="/node-learning-notes/notes/koa2/-1.3 koa2简析结构.html" class="sidebar-link">1.3 koa2简析结构</a></li><li><a href="/node-learning-notes/notes/koa2/-1.4 koa中间件开发与使用.html" class="sidebar-link">1.4 koa中间件开发与使用</a></li><li><a href="/node-learning-notes/notes/koa2/-10.1 单元测试.html" class="sidebar-link">10.1 单元测试</a></li><li><a href="/node-learning-notes/notes/koa2/-11.1 开发debug.html" class="sidebar-link">11.1 开发debug</a></li><li><a href="/node-learning-notes/notes/koa2/-12.1 快速启动.html" class="sidebar-link">12.1 快速启动</a></li><li><a href="/node-learning-notes/notes/koa2/-12.2 框架设计.html" class="sidebar-link">12.2 框架设计</a></li><li><a href="/node-learning-notes/notes/koa2/-12.3 分层操作.html" class="sidebar-link">12.3 分层操作</a></li><li><a href="/node-learning-notes/notes/koa2/-12.4 数据库设计.html" class="sidebar-link">12.4 数据库设计</a></li><li><a href="/node-learning-notes/notes/koa2/-12.5 路由设计.html" class="sidebar-link">12.5 路由设计</a></li><li><a href="/node-learning-notes/notes/koa2/-12.6 webpack4环境搭建.html" class="active sidebar-link">12.6 webpack4环境搭建</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/node-learning-notes/notes/koa2/-12.6 webpack4环境搭建.html#前言" class="sidebar-link">前言</a></li><li class="sidebar-sub-header"><a href="/node-learning-notes/notes/koa2/-12.6 webpack4环境搭建.html#webpack4" class="sidebar-link">webpack4</a></li><li class="sidebar-sub-header"><a href="/node-learning-notes/notes/koa2/-12.6 webpack4环境搭建.html#配置webpack4编译react-js-less-sass-antd-环境" class="sidebar-link">配置webpack4编译react.js + less + sass + antd 环境</a></li></ul></li><li><a href="/node-learning-notes/notes/koa2/-12.7 使用react.html" class="sidebar-link">12.7 使用react</a></li><li><a href="/node-learning-notes/notes/koa2/-12.8 登录注册功能实现.html" class="sidebar-link">12.8 登录注册功能实现</a></li><li><a href="/node-learning-notes/notes/koa2/-12.9 session登录态判断处理.html" class="sidebar-link">12.9 session登录态判断处理</a></li><li><a href="/node-learning-notes/notes/koa2/-13.1 import export使用.html" class="sidebar-link">13.1 import export使用</a></li><li><a href="/node-learning-notes/notes/koa2/-2.1 原生koa2实现路由.html" class="sidebar-link">2.1 原生koa2实现路由</a></li><li><a href="/node-learning-notes/notes/koa2/-2.2 koa router中间.html" class="sidebar-link">2.2 koa router中间</a></li><li><a href="/node-learning-notes/notes/koa2/-3.1 GET请求数据获取.html" class="sidebar-link">3.1 GET请求数据获取</a></li><li><a href="/node-learning-notes/notes/koa2/-3.2 POST请求数据获取.html" class="sidebar-link">3.2 POST请求数据获取</a></li><li><a href="/node-learning-notes/notes/koa2/-3.3 koa bodyparser中间件.html" class="sidebar-link">3.3 koa bodyparser中间件</a></li><li><a href="/node-learning-notes/notes/koa2/-4.1 原生koa2实现静态资源服务器.html" class="sidebar-link">4.1 原生koa2实现静态资源服务器</a></li><li><a href="/node-learning-notes/notes/koa2/-4.2 koa static中间件.html" class="sidebar-link">4.2 koa static中间件</a></li><li><a href="/node-learning-notes/notes/koa2/-5.1 koa2使用cookie.html" class="sidebar-link">5.1 koa2使用cookie</a></li><li><a href="/node-learning-notes/notes/koa2/-5.2 koa2实现session.html" class="sidebar-link">5.2 koa2实现session</a></li><li><a href="/node-learning-notes/notes/koa2/-6.1 koa2加载模板引擎.html" class="sidebar-link">6.1 koa2加载模板引擎</a></li><li><a href="/node-learning-notes/notes/koa2/-6.2 ejs模板引擎.html" class="sidebar-link">6.2 ejs模板引擎</a></li><li><a href="/node-learning-notes/notes/koa2/-7.1 busboy模块.html" class="sidebar-link">7.1 busboy模块</a></li><li><a href="/node-learning-notes/notes/koa2/-7.2 上传文件简单实现.html" class="sidebar-link">7.2 上传文件简单实现</a></li><li><a href="/node-learning-notes/notes/koa2/-7.3 异步上传图片实现.html" class="sidebar-link">7.3 异步上传图片实现</a></li><li><a href="/node-learning-notes/notes/koa2/-8.1 mysql模块.html" class="sidebar-link">8.1 mysql模块</a></li><li><a href="/node-learning-notes/notes/koa2/-8.2 async await封装使用mysql.html" class="sidebar-link">8.2 async await封装使用mysql</a></li><li><a href="/node-learning-notes/notes/koa2/-8.3 项目建表初始化.html" class="sidebar-link">8.3 项目建表初始化</a></li><li><a href="/node-learning-notes/notes/koa2/-9.1 原生koa2实现JSONP.html" class="sidebar-link">9.1 原生koa2实现JSONP</a></li><li><a href="/node-learning-notes/notes/koa2/-9.2 koa jsonp中间件.html" class="sidebar-link">9.2 koa jsonp中间件</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>其他</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/node-learning-notes/notes/other/01-操作数据库.html" class="sidebar-link">操作数据库</a></li><li><a href="/node-learning-notes/notes/other/02-Session 与 Token.html" class="sidebar-link">Session 与 Token</a></li><li><a href="/node-learning-notes/notes/other/03-Cookie、Session、Token、JWT.html" class="sidebar-link">Cookie、Session、Token、JWT</a></li><li><a href="/node-learning-notes/notes/other/04-Socket.html" class="sidebar-link">Socket</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="webpack4-环境搭建"><a href="#webpack4-环境搭建" class="header-anchor">#</a> webpack4 环境搭建</h1> <h2 id="前言"><a href="#前言" class="header-anchor">#</a> 前言</h2> <p>由于demos/project 前端渲染是通过react.js渲染的，这就需要webpack4 对react.js及其相关JSX，ES6/7代码进行编译和混淆压缩。</p> <h2 id="webpack4"><a href="#webpack4" class="header-anchor">#</a> webpack4</h2> <h3 id="安装和文档"><a href="#安装和文档" class="header-anchor">#</a> 安装和文档</h3> <p>可访问网<a href="https://webpack.js.org/" target="_blank" rel="noopener noreferrer">https://webpack.js.org/<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <h2 id="配置webpack4编译react-js-less-sass-antd-环境"><a href="#配置webpack4编译react-js-less-sass-antd-环境" class="header-anchor">#</a> 配置webpack4编译react.js + less + sass + antd 环境</h2> <h3 id="文件目录"><a href="#文件目录" class="header-anchor">#</a> 文件目录</h3> <div class="language-sh extra-class"><pre class="language-sh"><code>└── static <span class="token comment"># 项目静态文件目录</span>
+    ├── build
+    │   ├── webpack.base.config.js <span class="token comment"># 基础编译脚本</span>
+    │   ├── webpack.dev.config.js <span class="token comment"># 开发环境编译脚本</span>
+    │   └── webpack.prod.config.js <span class="token comment"># 生产环境编译脚本</span>
+    ├── output <span class="token comment"># 编译后输出目录</span>
+    │   ├── asset
+    │   ├── dist
+    │   └── upload
+    └── src <span class="token comment"># 待编译的ES6/7、JSX源代码</span>
+        ├── api
+        ├── apps
+        ├── components
+        ├── pages
+        ├── texts
+        └── utils
+</code></pre></div><h3 id="webpack4-编译基础配置"><a href="#webpack4-编译基础配置" class="header-anchor">#</a> webpack4 编译基础配置</h3> <h4 id="babel-7-配置"><a href="#babel-7-配置" class="header-anchor">#</a> babel@7 配置</h4> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">const</span> babelConfig <span class="token operator">=</span> <span class="token punctuation">{</span>
+  presets<span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token string">'@babel/env'</span><span class="token punctuation">,</span>
+    <span class="token comment">// [</span>
+    <span class="token comment">//   '@babel/env',</span>
+    <span class="token comment">//   {</span>
+    <span class="token comment">//     targets: {</span>
+    <span class="token comment">//       edge: '17',</span>
+    <span class="token comment">//       firefox: '60',</span>
+    <span class="token comment">//       chrome: '67',</span>
+    <span class="token comment">//       safari: '11.1'</span>
+    <span class="token comment">//     },</span>
+    <span class="token comment">//     useBuiltIns: 'usage'</span>
+    <span class="token comment">//   }</span>
+    <span class="token comment">// ],</span>
+    <span class="token string">'@babel/preset-react'</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token string">'plugins'</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">[</span>
+      <span class="token string">'import'</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span> <span class="token string">'libraryName'</span><span class="token operator">:</span> <span class="token string">'antd'</span><span class="token punctuation">,</span> <span class="token string">'libraryDirectory'</span><span class="token operator">:</span> <span class="token string">'lib'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string">'ant'</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">[</span>
+      <span class="token string">'import'</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span> <span class="token string">'libraryName'</span><span class="token operator">:</span> <span class="token string">'antd-mobile'</span><span class="token punctuation">,</span> <span class="token string">'libraryDirectory'</span><span class="token operator">:</span> <span class="token string">'lib'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string">'antd-mobile'</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string">'@babel/plugin-proposal-class-properties'</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> babelConfig<span class="token punctuation">;</span>
+
+</code></pre></div><h4 id="webpack-base-config-js"><a href="#webpack-base-config-js" class="header-anchor">#</a> webpack.base.config.js</h4> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'path'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> webpack <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'webpack'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> MiniCssExtractPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'mini-css-extract-plugin'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> babelConfig <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./babel.config'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// const prodMode = process.env.NODE_ENV === 'production';</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">srcResolve</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">file</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">'..'</span><span class="token punctuation">,</span> <span class="token string">'src'</span><span class="token punctuation">,</span> file<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">distResolve</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">file</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">'..'</span><span class="token punctuation">,</span> <span class="token string">'output'</span><span class="token punctuation">,</span> <span class="token string">'dist'</span><span class="token punctuation">,</span> file<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  entry<span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token string">'index'</span><span class="token operator">:</span> <span class="token function">srcResolve</span><span class="token punctuation">(</span><span class="token string">'js/index'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token string">'admin'</span> <span class="token operator">:</span> <span class="token function">srcResolve</span><span class="token punctuation">(</span><span class="token string">'pages/admin.js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token string">'work'</span> <span class="token operator">:</span> <span class="token function">srcResolve</span><span class="token punctuation">(</span><span class="token string">'pages/work.js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token string">'index'</span> <span class="token operator">:</span> <span class="token function">srcResolve</span><span class="token punctuation">(</span><span class="token string">'pages/index.js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token string">'error'</span> <span class="token operator">:</span> <span class="token function">srcResolve</span><span class="token punctuation">(</span><span class="token string">'pages/error.js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  output<span class="token operator">:</span> <span class="token punctuation">{</span>
+    path<span class="token operator">:</span> <span class="token function">distResolve</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    filename<span class="token operator">:</span> <span class="token string">'vendorjs/[name].js'</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  module<span class="token operator">:</span> <span class="token punctuation">{</span>
+    rules<span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        test<span class="token operator">:</span> <span class="token regex">/\.(js|jsx)$/</span><span class="token punctuation">,</span>
+        use<span class="token operator">:</span> <span class="token punctuation">{</span>
+          loader<span class="token operator">:</span> <span class="token string">'babel-loader'</span><span class="token punctuation">,</span>
+          options<span class="token operator">:</span> babelConfig
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        test<span class="token operator">:</span> <span class="token regex">/\.(css|less)$/</span><span class="token punctuation">,</span>
+        use<span class="token operator">:</span> <span class="token punctuation">[</span>
+          <span class="token comment">// devMode ? 'style-loader' : MiniCssExtractPlugin.loader,</span>
+          <span class="token comment">// 'style-loader',</span>
+          MiniCssExtractPlugin<span class="token punctuation">.</span>loader<span class="token punctuation">,</span>
+          <span class="token string">'css-loader'</span><span class="token punctuation">,</span>
+          <span class="token comment">// 'postcss-loader',</span>
+          <span class="token punctuation">{</span>
+            loader<span class="token operator">:</span> <span class="token string">'postcss-loader'</span><span class="token punctuation">,</span>
+            options<span class="token operator">:</span> <span class="token punctuation">{</span>
+              <span class="token function-variable function">plugins</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+                <span class="token keyword">return</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+              <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token string">'less-loader'</span>
+        <span class="token punctuation">]</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token keyword">new</span> <span class="token class-name">MiniCssExtractPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      filename<span class="token operator">:</span> <span class="token string">'css/[name].css'</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
+    splitChunks<span class="token operator">:</span> <span class="token punctuation">{</span>
+      cacheGroups<span class="token operator">:</span> <span class="token punctuation">{</span>
+        commons<span class="token operator">:</span> <span class="token punctuation">{</span>
+          test<span class="token operator">:</span> <span class="token regex">/[\\/]node_modules[\\/]/</span><span class="token punctuation">,</span>
+          name<span class="token operator">:</span> <span class="token string">'vendor'</span><span class="token punctuation">,</span>
+          chunks<span class="token operator">:</span> <span class="token string">'all'</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+</code></pre></div><h3 id="配置开发-生产环境webpack4-编译设置"><a href="#配置开发-生产环境webpack4-编译设置" class="header-anchor">#</a> 配置开发&amp;生产环境webpack4 编译设置</h3> <p>为了方便编译基本配置代码统一管理，开发环境（wepack.dev.config.js）和生产环境（webpack.prod.config.js）的编译配置都是继承了基本配置（wepack.base.config.js）的代码</p> <h4 id="开发环境配置-wepack-dev-config-js"><a href="#开发环境配置-wepack-dev-config-js" class="header-anchor">#</a> 开发环境配置 wepack.dev.config.js</h4> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">var</span> merge <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'webpack-merge'</span><span class="token punctuation">)</span>
+<span class="token keyword">var</span> webpack <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'webpack'</span><span class="token punctuation">)</span>
+<span class="token keyword">var</span> baseWebpackConfig <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./webpack.base.config'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token function">merge</span><span class="token punctuation">(</span>baseWebpackConfig<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+
+  devtool<span class="token operator">:</span> <span class="token string">'source-map'</span><span class="token punctuation">,</span>
+  plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
+    
+    <span class="token keyword">new</span> <span class="token class-name">webpack<span class="token punctuation">.</span>DefinePlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      <span class="token string">'process.env'</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token constant">NODE_ENV</span><span class="token operator">:</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span><span class="token string">'development'</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div><h4 id="编译环境配置-wepack-prod-config-js"><a href="#编译环境配置-wepack-prod-config-js" class="header-anchor">#</a> 编译环境配置 wepack.prod.config.js</h4> <div class="language-js extra-class"><pre class="language-js"><code>process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">NODE_ENV</span> <span class="token operator">=</span> <span class="token string">'production'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> merge <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'webpack-merge'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> UglifyJsPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'uglifyjs-webpack-plugin'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> OptimizeCSSAssetsPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'optimize-css-assets-webpack-plugin'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> config <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./webpack.base.config'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token function">merge</span><span class="token punctuation">(</span>config<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+  mode<span class="token operator">:</span> <span class="token string">'production'</span><span class="token punctuation">,</span>
+  <span class="token comment">// plugins: [</span>
+  <span class="token comment">//   new UglifyJsPlugin()</span>
+  <span class="token comment">// ]</span>
+  optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
+    minimizer<span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token keyword">new</span> <span class="token class-name">UglifyJsPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        cache<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        parallel<span class="token operator">:</span> <span class="token boolean">true</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token keyword">new</span> <span class="token class-name">OptimizeCSSAssetsPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">]</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/node-learning-notes/notes/koa2/-12.5 路由设计.html" class="prev">
+        12.5 路由设计
+      </a></span> <span class="next"><a href="/node-learning-notes/notes/koa2/-12.7 使用react.html">
+        12.7 使用react
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/node-learning-notes/assets/js/app.06995101.js" defer></script><script src="/node-learning-notes/assets/js/4.cbb566af.js" defer></script><script src="/node-learning-notes/assets/js/67.05e9a058.js" defer></script>
+  </body>
+</html>

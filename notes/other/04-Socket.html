@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>WebSocket | Node.js学习指南</title>
+    <meta name="description" content="Node.js笔记系统整理">
+    <meta name="generator" content="VuePress 1.3.0">
+    <link rel="icon" href="/node-learning-notes/logo.png">
+  <link rel="manifest" href="/node-learning-notes/manifest.json">
+  <meta name="theme-color" content="#3eaf7c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="/node-learning-notes/icons/apple-touch-icon-152x152.png">
+  <link rel="mask-icon" href="/node-learning-notes/icons/safari-pinned-tab.svg" color="#3eaf7c">
+  <meta name="msapplication-TileImage" content="/icons/msapplication-icon-144x144.png">
+  <meta name="msapplication-TileColor" content="#000000">
+  <meta name="apple-mobile-web-app-status-bar-style">
+    
+    <link rel="preload" href="/node-learning-notes/assets/css/0.styles.04d71374.css" as="style"><link rel="preload" href="/node-learning-notes/assets/js/app.06995101.js" as="script"><link rel="preload" href="/node-learning-notes/assets/js/4.cbb566af.js" as="script"><link rel="preload" href="/node-learning-notes/assets/js/106.e0e65ae5.js" as="script"><link rel="prefetch" href="/node-learning-notes/assets/js/10.1df831e5.js"><link rel="prefetch" href="/node-learning-notes/assets/js/100.faed81e1.js"><link rel="prefetch" href="/node-learning-notes/assets/js/101.4ca9de43.js"><link rel="prefetch" href="/node-learning-notes/assets/js/102.bed33a4e.js"><link rel="prefetch" href="/node-learning-notes/assets/js/103.47cfeeb4.js"><link rel="prefetch" href="/node-learning-notes/assets/js/104.99382f62.js"><link rel="prefetch" href="/node-learning-notes/assets/js/105.a09c57ad.js"><link rel="prefetch" href="/node-learning-notes/assets/js/107.006157e7.js"><link rel="prefetch" href="/node-learning-notes/assets/js/11.6d248a1f.js"><link rel="prefetch" href="/node-learning-notes/assets/js/12.089b9acc.js"><link rel="prefetch" href="/node-learning-notes/assets/js/13.7503e5c6.js"><link rel="prefetch" href="/node-learning-notes/assets/js/14.ea26514e.js"><link rel="prefetch" href="/node-learning-notes/assets/js/15.6f7e5a72.js"><link rel="prefetch" href="/node-learning-notes/assets/js/16.15f31946.js"><link rel="prefetch" href="/node-learning-notes/assets/js/17.546f352d.js"><link rel="prefetch" href="/node-learning-notes/assets/js/18.43cadce8.js"><link rel="prefetch" href="/node-learning-notes/assets/js/19.20c00e37.js"><link rel="prefetch" href="/node-learning-notes/assets/js/20.d4bd9d39.js"><link rel="prefetch" href="/node-learning-notes/assets/js/21.147d3198.js"><link rel="prefetch" href="/node-learning-notes/assets/js/22.822af822.js"><link rel="prefetch" href="/node-learning-notes/assets/js/23.ad0f4e46.js"><link rel="prefetch" href="/node-learning-notes/assets/js/24.4ed1364a.js"><link rel="prefetch" href="/node-learning-notes/assets/js/25.e8be0e71.js"><link rel="prefetch" href="/node-learning-notes/assets/js/26.a4b68f4e.js"><link rel="prefetch" href="/node-learning-notes/assets/js/27.eaeaac83.js"><link rel="prefetch" href="/node-learning-notes/assets/js/28.ce8ab57d.js"><link rel="prefetch" href="/node-learning-notes/assets/js/29.0b3e19ed.js"><link rel="prefetch" href="/node-learning-notes/assets/js/30.409d36e7.js"><link rel="prefetch" href="/node-learning-notes/assets/js/31.dc762526.js"><link rel="prefetch" href="/node-learning-notes/assets/js/32.05ff8283.js"><link rel="prefetch" href="/node-learning-notes/assets/js/33.b095bc5b.js"><link rel="prefetch" href="/node-learning-notes/assets/js/34.ec57608e.js"><link rel="prefetch" href="/node-learning-notes/assets/js/35.5f3ea3ae.js"><link rel="prefetch" href="/node-learning-notes/assets/js/36.ef51b036.js"><link rel="prefetch" href="/node-learning-notes/assets/js/37.8351c418.js"><link rel="prefetch" href="/node-learning-notes/assets/js/38.a20ee99d.js"><link rel="prefetch" href="/node-learning-notes/assets/js/39.88094c54.js"><link rel="prefetch" href="/node-learning-notes/assets/js/40.084cc24a.js"><link rel="prefetch" href="/node-learning-notes/assets/js/41.ceec190d.js"><link rel="prefetch" href="/node-learning-notes/assets/js/42.310c61ee.js"><link rel="prefetch" href="/node-learning-notes/assets/js/43.5b70b2d9.js"><link rel="prefetch" href="/node-learning-notes/assets/js/44.060a5dcd.js"><link rel="prefetch" href="/node-learning-notes/assets/js/45.8363b81b.js"><link rel="prefetch" href="/node-learning-notes/assets/js/46.4397f3e0.js"><link rel="prefetch" href="/node-learning-notes/assets/js/47.2ea413fc.js"><link rel="prefetch" href="/node-learning-notes/assets/js/48.aa2c07fb.js"><link rel="prefetch" href="/node-learning-notes/assets/js/49.14a61d03.js"><link rel="prefetch" href="/node-learning-notes/assets/js/5.36c9e133.js"><link rel="prefetch" href="/node-learning-notes/assets/js/50.eb271fd9.js"><link rel="prefetch" href="/node-learning-notes/assets/js/51.bc775c5f.js"><link rel="prefetch" href="/node-learning-notes/assets/js/52.fa54eb4e.js"><link rel="prefetch" href="/node-learning-notes/assets/js/53.1ee619d8.js"><link rel="prefetch" href="/node-learning-notes/assets/js/54.5d6b9ae6.js"><link rel="prefetch" href="/node-learning-notes/assets/js/55.1d902dc8.js"><link rel="prefetch" href="/node-learning-notes/assets/js/56.35cf11c3.js"><link rel="prefetch" href="/node-learning-notes/assets/js/57.a9d87e28.js"><link rel="prefetch" href="/node-learning-notes/assets/js/58.002141b4.js"><link rel="prefetch" href="/node-learning-notes/assets/js/59.b81489d4.js"><link rel="prefetch" href="/node-learning-notes/assets/js/6.58217116.js"><link rel="prefetch" href="/node-learning-notes/assets/js/60.c35e60a8.js"><link rel="prefetch" href="/node-learning-notes/assets/js/61.f822b13d.js"><link rel="prefetch" href="/node-learning-notes/assets/js/62.485b4012.js"><link rel="prefetch" href="/node-learning-notes/assets/js/63.c7c2b6b5.js"><link rel="prefetch" href="/node-learning-notes/assets/js/64.5d43709b.js"><link rel="prefetch" href="/node-learning-notes/assets/js/65.b611bc8d.js"><link rel="prefetch" href="/node-learning-notes/assets/js/66.59d2a614.js"><link rel="prefetch" href="/node-learning-notes/assets/js/67.05e9a058.js"><link rel="prefetch" href="/node-learning-notes/assets/js/68.0b86b935.js"><link rel="prefetch" href="/node-learning-notes/assets/js/69.8c93eaf6.js"><link rel="prefetch" href="/node-learning-notes/assets/js/7.9ed243c7.js"><link rel="prefetch" href="/node-learning-notes/assets/js/70.177565f8.js"><link rel="prefetch" href="/node-learning-notes/assets/js/71.617d61d2.js"><link rel="prefetch" href="/node-learning-notes/assets/js/72.cda5cf3a.js"><link rel="prefetch" href="/node-learning-notes/assets/js/73.2201f15f.js"><link rel="prefetch" href="/node-learning-notes/assets/js/74.5aad0673.js"><link rel="prefetch" href="/node-learning-notes/assets/js/75.05e9ddf5.js"><link rel="prefetch" href="/node-learning-notes/assets/js/76.909eda7b.js"><link rel="prefetch" href="/node-learning-notes/assets/js/77.d9e10d0d.js"><link rel="prefetch" href="/node-learning-notes/assets/js/78.e3ab5082.js"><link rel="prefetch" href="/node-learning-notes/assets/js/79.6bea4726.js"><link rel="prefetch" href="/node-learning-notes/assets/js/8.5121c136.js"><link rel="prefetch" href="/node-learning-notes/assets/js/80.2b3a46e0.js"><link rel="prefetch" href="/node-learning-notes/assets/js/81.d8a2b86a.js"><link rel="prefetch" href="/node-learning-notes/assets/js/82.59884135.js"><link rel="prefetch" href="/node-learning-notes/assets/js/83.7dd235af.js"><link rel="prefetch" href="/node-learning-notes/assets/js/84.75f51e4b.js"><link rel="prefetch" href="/node-learning-notes/assets/js/85.6b0d363d.js"><link rel="prefetch" href="/node-learning-notes/assets/js/86.011fd32a.js"><link rel="prefetch" href="/node-learning-notes/assets/js/87.649522e0.js"><link rel="prefetch" href="/node-learning-notes/assets/js/88.d60b555e.js"><link rel="prefetch" href="/node-learning-notes/assets/js/89.b09d6659.js"><link rel="prefetch" href="/node-learning-notes/assets/js/9.c39e9c7d.js"><link rel="prefetch" href="/node-learning-notes/assets/js/90.bdd3e393.js"><link rel="prefetch" href="/node-learning-notes/assets/js/91.4c084abf.js"><link rel="prefetch" href="/node-learning-notes/assets/js/92.8751acf1.js"><link rel="prefetch" href="/node-learning-notes/assets/js/93.7c5d406d.js"><link rel="prefetch" href="/node-learning-notes/assets/js/94.9cbbda26.js"><link rel="prefetch" href="/node-learning-notes/assets/js/95.9d6d64b9.js"><link rel="prefetch" href="/node-learning-notes/assets/js/96.1f58d5ae.js"><link rel="prefetch" href="/node-learning-notes/assets/js/97.24de5796.js"><link rel="prefetch" href="/node-learning-notes/assets/js/98.81ff5119.js"><link rel="prefetch" href="/node-learning-notes/assets/js/99.047c4c86.js"><link rel="prefetch" href="/node-learning-notes/assets/js/vendors~docsearch.73734a07.js"><link rel="prefetch" href="/node-learning-notes/assets/js/vendors~notification.c14938e7.js">
+    <link rel="stylesheet" href="/node-learning-notes/assets/css/0.styles.04d71374.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container custom-code-highlight"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/node-learning-notes/" class="home-link router-link-active"><!----> <span class="site-name">Node.js学习指南</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/poetries/node-learning-notes" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/poetries/node-learning-notes" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>基础篇</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/node-learning-notes/notes/base/01-环境搭建.html" class="sidebar-link">环境搭建</a></li><li><a href="/node-learning-notes/notes/base/02-node部署.html" class="sidebar-link">node部署</a></li><li><a href="/node-learning-notes/notes/base/03-基础应用.html" class="sidebar-link">基础应用</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>内置模块</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>进阶篇</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Express</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Koa2</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>其他</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/node-learning-notes/notes/other/01-操作数据库.html" class="sidebar-link">操作数据库</a></li><li><a href="/node-learning-notes/notes/other/02-Session 与 Token.html" class="sidebar-link">Session 与 Token</a></li><li><a href="/node-learning-notes/notes/other/03-Cookie、Session、Token、JWT.html" class="sidebar-link">Cookie、Session、Token、JWT</a></li><li><a href="/node-learning-notes/notes/other/04-Socket.html" class="active sidebar-link">Socket</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/node-learning-notes/notes/other/04-Socket.html#websocket" class="sidebar-link">WebSocket</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/node-learning-notes/notes/other/04-Socket.html#一、websocket-解决了什么问题" class="sidebar-link">一、WebSocket 解决了什么问题</a></li><li class="sidebar-sub-header"><a href="/node-learning-notes/notes/other/04-Socket.html#二、websocket的class类" class="sidebar-link">二、webSocket的class类</a></li><li class="sidebar-sub-header"><a href="/node-learning-notes/notes/other/04-Socket.html#三、websocket不稳定" class="sidebar-link">三、WebSocket不稳定</a></li><li class="sidebar-sub-header"><a href="/node-learning-notes/notes/other/04-Socket.html#_3-2-websocket心跳机制" class="sidebar-link">3.2 WebSocket心跳机制</a></li><li class="sidebar-sub-header"><a href="/node-learning-notes/notes/other/04-Socket.html#四、关于websocket" class="sidebar-link">四、关于WebSocket</a></li><li class="sidebar-sub-header"><a href="/node-learning-notes/notes/other/04-Socket.html#五、websocket的优点" class="sidebar-link">五、WebSocket的优点</a></li></ul></li><li class="sidebar-sub-header"><a href="/node-learning-notes/notes/other/04-Socket.html#socket-io" class="sidebar-link">socket.io</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/node-learning-notes/notes/other/04-Socket.html#一、原生node与socket-io通信" class="sidebar-link">一、原生Node与socket.io通信</a></li><li class="sidebar-sub-header"><a href="/node-learning-notes/notes/other/04-Socket.html#二、聊天室、智能机器人实现原理" class="sidebar-link">二、聊天室、智能机器人实现原理</a></li><li class="sidebar-sub-header"><a href="/node-learning-notes/notes/other/04-Socket.html#三、koa中socket-io的使用" class="sidebar-link">三、Koa中Socket.io的使用</a></li></ul></li></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="websocket"><a href="#websocket" class="header-anchor">#</a> WebSocket</h2> <h3 id="一、websocket-解决了什么问题"><a href="#一、websocket-解决了什么问题" class="header-anchor">#</a> 一、WebSocket 解决了什么问题</h3> <ul><li>客户端(浏览器)和服务器端进行通信，只能由客户端发起<code>ajax</code>请求，才能进行通信，服务器端无法主动向客户端推送信息</li> <li>当出现类似体育赛事、聊天室、实时位置之类的场景时，客户端要获取服务器端的变化，就只能通过轮询(定时请求)来了解服务器端有没有新的信息变化</li></ul> <p>轮询效率低，非常浪费资源(需要不断发送请求，不停链接服务器)</p> <blockquote><p><code>WebSocket</code>的出现，让服务器端可以主动向服务器端发送信息，使得浏览器具备了实时双向通信的能力,这就是<code>WebSocket</code>解决的问题</p></blockquote> <p><strong>一个超简单例子</strong></p> <blockquote><p>新建一个<code>html</code>文件，将本栗子找个地方跑一下试试，即可轻松入门<code>WebSocket</code></p></blockquote> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">function</span> <span class="token function">socketConnect</span><span class="token punctuation">(</span><span class="token parameter">url</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 客户端与服务器进行连接</span>
+    <span class="token keyword">let</span> ws <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">WebSocket</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 返回`WebSocket`对象，赋值给变量ws</span>
+    <span class="token comment">// 连接成功回调</span>
+    ws<span class="token punctuation">.</span><span class="token function-variable function">onopen</span> <span class="token operator">=</span> <span class="token parameter">e</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'连接成功'</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span>
+        ws<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token string">'我发送消息给服务端'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 客户端与服务器端通信</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// 监听服务器端返回的信息</span>
+    ws<span class="token punctuation">.</span><span class="token function-variable function">onmessage</span> <span class="token operator">=</span> <span class="token parameter">e</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'服务器端返回：'</span><span class="token punctuation">,</span> e<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
+        <span class="token comment">// do something</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> ws<span class="token punctuation">;</span> <span class="token comment">// 返回websocket对象</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">let</span> wsValue <span class="token operator">=</span> <span class="token function">socketConnect</span><span class="token punctuation">(</span><span class="token string">'ws://121.40.165.18:8800'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// websocket对象</span>
+</code></pre></div><blockquote><p>上述栗子中<code>WebSocket</code>的接口地址出自：<code>WebSocket</code> 在线测试，在开发的时候也可以用于测试后端给的地址是否可用</p></blockquote> <p><img src="http://blog.poetries.top/img-repo/2019/10/389.png" alt=""></p> <h3 id="二、websocket的class类"><a href="#二、websocket的class类" class="header-anchor">#</a> 二、webSocket的class类</h3> <blockquote><p>当项目中很多地方使用<code>WebSocket</code>，把它封成一个<code>class</code>类，是更好的选择</p></blockquote> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">class</span> <span class="token class-name">WebSocketClass</span> <span class="token punctuation">{</span>
+    <span class="token comment">/**
+     * @description: 初始化实例属性，保存参数
+     * @param {String} url ws的接口
+     * @param {Function} msgCallback 服务器信息的回调传数据给函数
+     * @param {String} name 可选值 用于区分ws，用于debugger
+     */</span>
+    <span class="token function">constructor</span><span class="token punctuation">(</span>url<span class="token punctuation">,</span> msgCallback<span class="token punctuation">,</span> name <span class="token operator">=</span> <span class="token string">'default'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>url <span class="token operator">=</span> url<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>msgCallback <span class="token operator">=</span> msgCallback<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>ws <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>  <span class="token comment">// websocket对象</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>status <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span> <span class="token comment">// websocket是否关闭</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">/**
+     * @description: 初始化 连接websocket或重连webSocket时调用
+     * @param {*} 可选值 要传的数据
+     */</span>
+    <span class="token function">connect</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 新建 WebSocket 实例</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>ws <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">WebSocket</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>ws<span class="token punctuation">.</span><span class="token function-variable function">onopen</span> <span class="token operator">=</span> <span class="token parameter">e</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+            <span class="token comment">// 连接ws成功回调</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>status <span class="token operator">=</span> <span class="token string">'open'</span><span class="token punctuation">;</span>
+            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span>name<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">连接成功</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span> e<span class="token punctuation">)</span>
+            <span class="token comment">// this.heartCheck();</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>data <span class="token operator">!==</span> <span class="token keyword">undefined</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token comment">// 有要传的数据,就发给后端</span>
+                <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>ws<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">// 监听服务器端返回的信息</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>ws<span class="token punctuation">.</span><span class="token function-variable function">onmessage</span> <span class="token operator">=</span> <span class="token parameter">e</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+            <span class="token comment">// 把数据传给回调函数，并执行回调</span>
+            <span class="token comment">// if (e.data === 'pong') {</span>
+            <span class="token comment">//     this.pingPong = 'pong'; // 服务器端返回pong,修改pingPong的状态</span>
+            <span class="token comment">// }</span>
+            <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">msgCallback</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">// ws关闭回调</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>ws<span class="token punctuation">.</span><span class="token function-variable function">onclose</span> <span class="token operator">=</span> <span class="token parameter">e</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">closeHandle</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 判断是否关闭</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">// ws出错回调</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function-variable function">onerror</span> <span class="token operator">=</span> <span class="token parameter">e</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">closeHandle</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 判断是否关闭</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// heartCheck() {</span>
+    <span class="token comment">//     // 心跳机制的时间可以自己与后端约定</span>
+    <span class="token comment">//     this.pingPong = 'ping'; // ws的心跳机制状态值</span>
+    <span class="token comment">//     this.pingInterval = setInterval(() =&gt; {</span>
+    <span class="token comment">//         if (this.ws.readyState === 1) {</span>
+    <span class="token comment">//             // 检查ws为链接状态 才可发送</span>
+    <span class="token comment">//             this.ws.send('ping'); // 客户端发送ping</span>
+    <span class="token comment">//         }</span>
+    <span class="token comment">//     }, 10000)</span>
+    <span class="token comment">//     this.pongInterval = setInterval(() =&gt; {</span>
+    <span class="token comment">//         this.pingPong = false;</span>
+    <span class="token comment">//         if (this.pingPong === 'ping') {</span>
+    <span class="token comment">//             this.closeHandle('pingPong没有改变为pong'); // 没有返回pong 重启webSocket</span>
+    <span class="token comment">//         }</span>
+    <span class="token comment">//         // 重置为ping 若下一次 ping 发送失败 或者pong返回失败(pingPong不会改成pong)，将重启</span>
+    <span class="token comment">//         console.log('返回pong')</span>
+    <span class="token comment">//         this.pingPong = 'ping'</span>
+    <span class="token comment">//     }, 20000)</span>
+    <span class="token comment">// }</span>
+    <span class="token comment">// 发送信息给服务器</span>
+    <span class="token function">sendHandle</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span>name<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">发送消息给服务器:</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span> data<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>ws<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">closeHandle</span><span class="token punctuation">(</span>e <span class="token operator">=</span> <span class="token string">'err'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 因为webSocket并不稳定，规定只能手动关闭(调closeMyself方法)，否则就重连</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>status <span class="token operator">!==</span> <span class="token string">'close'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span>name<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">断开，重连websocket</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span> e<span class="token punctuation">)</span>
+            <span class="token comment">// if (this.pingInterval !== undefined &amp;&amp; this.pongInterval !== undefined) {</span>
+            <span class="token comment">//     // 清除定时器</span>
+            <span class="token comment">//     clearInterval(this.pingInterval);</span>
+            <span class="token comment">//     clearInterval(this.pongInterval);</span>
+            <span class="token comment">// }</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">connect</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 重连</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span>name<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">websocket手动关闭</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// 手动关闭WebSocket</span>
+    <span class="token function">closeMyself</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">关闭</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span>name<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>status <span class="token operator">=</span> <span class="token string">'close'</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>ws<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">function</span> <span class="token function">someFn</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'接收服务器消息的回调：'</span><span class="token punctuation">,</span> data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// const wsValue = new WebSocketClass('ws://121.40.165.18:8800', someFn, 'wsName'); // 这个链接一天只能发送消息50次</span>
+<span class="token keyword">const</span> wsValue <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">WebSocketClass</span><span class="token punctuation">(</span><span class="token string">'wss://echo.websocket.org'</span><span class="token punctuation">,</span> someFn<span class="token punctuation">,</span> <span class="token string">'wsName'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 阮一峰老师教程链接</span>
+wsValue<span class="token punctuation">.</span><span class="token function">connect</span><span class="token punctuation">(</span><span class="token string">'立即与服务器通信'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 连接服务器</span>
+<span class="token comment">// setTimeout(() =&gt; {</span>
+<span class="token comment">//     wsValue.sendHandle('传消息给服务器')</span>
+<span class="token comment">// }, 1000);</span>
+<span class="token comment">// setTimeout(() =&gt; {</span>
+<span class="token comment">//     wsValue.closeMyself(); // 关闭ws</span>
+<span class="token comment">// }, 10000)</span>
+</code></pre></div><blockquote><p>可以把<code>class</code>放在一个js文件里面,<code>export</code>出去，然后在需要用的地方再<code>import</code>进来，把参数传进去就可以用了</p></blockquote> <h3 id="三、websocket不稳定"><a href="#三、websocket不稳定" class="header-anchor">#</a> 三、WebSocket不稳定</h3> <blockquote><p><code>WebSocket</code>并不稳定，在使用一段时间后，可能会断开连接，貌似至今没有一个为何会断开连接的公论，所以我们需要让<code>WebSocket</code>保持连接状态，这里推荐两种方法</p></blockquote> <h4 id="_3-1-websocket设置变量，判断是否手动关闭连接"><a href="#_3-1-websocket设置变量，判断是否手动关闭连接" class="header-anchor">#</a> 3.1 WebSocket设置变量，判断是否手动关闭连接</h4> <blockquote><p><code>class</code>类中就是用的这种方式:设置一个变量，在<code>webSocket</code>关闭/报错的回调中，判断是不是手动关闭的，如果不是的话，就重新连接，这样做的优缺点如下</p></blockquote> <ul><li>优点：请求较少(相对于心跳连接)，易设置。</li> <li>缺点：可能会导致丢失数据,在断开重连的这段时间中，恰好双方正在通信</li></ul> <h3 id="_3-2-websocket心跳机制"><a href="#_3-2-websocket心跳机制" class="header-anchor">#</a> 3.2 WebSocket心跳机制</h3> <blockquote><p>因为第一种方案的缺点，并且可能会有其他一些未知情况导致断开连接而没有触发Error或Close事件。这样就导致实际连接已经断开了，而客户端和服务端却不知道，还在傻傻的等着消息来</p></blockquote> <ul><li>想出了一种叫做心跳机制的解决方法：</li> <li>客户端就像心跳一样每隔固定的时间发送一次ping，来告诉服务器，我还活着，而服务器也会返回pong，来告诉客户端，服务器还活着。</li> <li>具体的实现方法，在上面<code>class</code>的注释中，将其打开，即可看到效果</li></ul> <h3 id="四、关于websocket"><a href="#四、关于websocket" class="header-anchor">#</a> 四、关于WebSocket</h3> <h4 id="_4-1-websocket的当前状态-websocket-readystate"><a href="#_4-1-websocket的当前状态-websocket-readystate" class="header-anchor">#</a> 4.1 WebSocket的当前状态:<code>WebSocket.readyState</code></h4> <p><strong>下面是WebSocket.readyState的四个值(四种状态)：</strong></p> <ul><li><code>0</code>: 表示正在连接</li> <li><code>1</code>: 表示连接成功，可以通信了</li> <li><code>2</code>: 表示连接正在关闭</li> <li><code>3</code>: 表示连接已经关闭，或者打开连接失败</li></ul> <blockquote><p>我们可以利用当前状态来做一些事情，比如上面栗子中当<code>WebSocket</code>链接成功后，才允许客户端发<code>送ping</code></p></blockquote> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>ws<span class="token punctuation">.</span>readyState <span class="token operator">===</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 检查ws为链接状态 才可发送</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>ws<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token string">'ping'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 客户端发送ping</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h4 id="_4-2-websocket还可以发送-接收-二进制数据"><a href="#_4-2-websocket还可以发送-接收-二进制数据" class="header-anchor">#</a> 4.2 <code>WebSocket</code>还可以发送/接收 二进制数据</h4> <blockquote><p>二进制数据包括：<code>blob</code>对象和<code>Arraybuffer</code>对象，所以我们需要分开来处理</p></blockquote> <div class="language-js extra-class"><pre class="language-js"><code> <span class="token comment">// 接收数据</span>
+ws<span class="token punctuation">.</span><span class="token function-variable function">onmessage</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">event</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>event<span class="token punctuation">.</span>data <span class="token keyword">instanceof</span> <span class="token class-name">ArrayBuffer</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment">// 判断 ArrayBuffer 对象</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">if</span><span class="token punctuation">(</span>event<span class="token punctuation">.</span>data <span class="token keyword">instanceof</span> <span class="token class-name">Blob</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment">// 判断 Blob 对象</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 发送 Blob 对象的例子</span>
+<span class="token keyword">let</span> file <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'input[type=&quot;file&quot;]'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>files<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+ws<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 发送 ArrayBuffer 对象的例子</span>
+<span class="token keyword">var</span> img <span class="token operator">=</span> canvas_context<span class="token punctuation">.</span><span class="token function">getImageData</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">400</span><span class="token punctuation">,</span> <span class="token number">320</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> binary <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Uint8Array</span><span class="token punctuation">(</span>img<span class="token punctuation">.</span>data<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> img<span class="token punctuation">.</span>data<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    binary<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> img<span class="token punctuation">.</span>data<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+ws<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span>binary<span class="token punctuation">.</span>buffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><blockquote><p>如果你要发送的二进制数据很大的话，如何判断发送完毕：</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>webSocket.bufferedAmount属性，表示还有多少字节的二进制数据没有发送出去：
+
+var data = new ArrayBuffer(10000000);
+socket.send(data);
+if (socket.bufferedAmount === 0) {
+    // 发送完毕
+} else {
+    // 发送还没结束
+}
+</code></pre></div><h3 id="五、websocket的优点"><a href="#五、websocket的优点" class="header-anchor">#</a> 五、WebSocket的优点</h3> <ul><li>双向通信</li> <li>数据格式比较轻量，性能开销小，通信高效
+<ul><li>协议控制的数据包头部较小，而<code>HTTP</code>协议每次通信都需要携带完整的头部</li></ul></li> <li>更好的二进制支持</li> <li>没有同源限制，客户端可以与任意服务器通信</li> <li>与 <code>HTTP</code> 协议有着良好的兼容性。默认端口也是<code>80</code>和<code>443</code>，并且握手阶段采用 <code>HTTP</code> 协议，因此握手时不容易屏蔽，能通过各种 <code>HTTP</code> 代理服务器</li></ul> <h2 id="socket-io"><a href="#socket-io" class="header-anchor">#</a> socket.io</h2> <h3 id="一、原生node与socket-io通信"><a href="#一、原生node与socket-io通信" class="header-anchor">#</a> 一、原生Node与socket.io通信</h3> <blockquote><p>原生<code>nodejs</code>结合<code>Socket.io</code>实现服务器和客户端的相互通信</p></blockquote> <blockquote><p>官方文档 https://socket.io</p></blockquote> <h4 id="_1-1-搭建服务"><a href="#_1-1-搭建服务" class="header-anchor">#</a> 1.1 搭建服务</h4> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># 新建目录</span>
+<span class="token function">mkdir</span> socket <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">cd</span> socket
+
+<span class="token comment"># 生成package.json</span>
+<span class="token function">npm</span> init -y
+
+<span class="token comment"># 安装socket</span>
+<span class="token function">npm</span> <span class="token function">install</span> socket.io
+</code></pre></div><div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// app.js</span>
+
+<span class="token keyword">var</span> http <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;http&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> server <span class="token operator">=</span> http<span class="token punctuation">.</span><span class="token function">createServer</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span>res</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>req<span class="token punctuation">.</span>url <span class="token operator">==</span> <span class="token string">&quot;/&quot;</span><span class="token punctuation">)</span><span class="token punctuation">{</span> <span class="token comment">//显示首页</span>
+        fs<span class="token punctuation">.</span><span class="token function">readFile</span><span class="token punctuation">(</span><span class="token string">&quot;./index.html&quot;</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span>data</span><span class="token punctuation">)</span><span class="token punctuation">{</span> 
+            res<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> io <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'socket.io'</span><span class="token punctuation">)</span><span class="token punctuation">(</span>server<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">//监听连接事件 </span>
+io<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">&quot;connection&quot;</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">socket</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;1 个客户端连接了&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+server<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token number">3000</span><span class="token punctuation">,</span><span class="token string">&quot;127.0.0.1&quot;</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'app run at 127.0.0.1:3000'</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 写完这句话之后，你就会发现，http://127.0.0.1:3000/socket.io/socket.io.js 就是一个 js 文件 的地址了</span>
+</code></pre></div><h4 id="_1-2-新建页面"><a href="#_1-2-新建页面" class="header-anchor">#</a> 1.2 新建页面</h4> <blockquote><p>现在需要制作一个<code>index</code>页面，这个页面中，必须引用秘密<code>js</code>文件。调用<code>io</code>函数，取得<code>socket</code> 对象</p></blockquote> <div class="language-html extra-class"><pre class="language-html"><code><span class="token doctype">&lt;!DOCTYPE html&gt;</span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>en<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>UTF-8<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">&gt;</span></span>Document<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">&gt;</span></span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">&gt;</span></span>我是 index 页面，我引用了秘密 script 文件<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>text/javascript<span class="token punctuation">&quot;</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>/socket.io/socket.io.js<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>text/javascript<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+    <span class="token keyword">var</span> socket <span class="token operator">=</span> <span class="token function">io</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>socket<span class="token punctuation">)</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span> 
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><blockquote><p>至此，服务器和客户端都有 <code>socket</code> 对象了。服务器的 <code>socket</code> 对象:</p></blockquote> <blockquote><p><code>socket对象</code></p></blockquote> <p><img src="http://blog.poetries.top/img-repo/2019/10/390.png" alt=""> <img src="http://blog.poetries.top/img-repo/2019/10/391.png" alt=""></p> <h4 id="_1-3-服务器端通过emit广播，通过on接收广播"><a href="#_1-3-服务器端通过emit广播，通过on接收广播" class="header-anchor">#</a> 1.3 服务器端通过emit广播，通过on接收广播</h4> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// app.js</span>
+
+<span class="token keyword">var</span> http <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;http&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> server <span class="token operator">=</span> http<span class="token punctuation">.</span><span class="token function">createServer</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span>res</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>req<span class="token punctuation">.</span>url <span class="token operator">==</span> <span class="token string">&quot;/&quot;</span><span class="token punctuation">)</span><span class="token punctuation">{</span> <span class="token comment">//显示首页</span>
+        fs<span class="token punctuation">.</span><span class="token function">readFile</span><span class="token punctuation">(</span><span class="token string">&quot;./index.html&quot;</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span>data</span><span class="token punctuation">)</span><span class="token punctuation">{</span> 
+            res<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> io <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'socket.io'</span><span class="token punctuation">)</span><span class="token punctuation">(</span>server<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">//监听连接事件 </span>
+io<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'connection'</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">socket</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'和服务器建立连接了'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    socket<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'to-server'</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    
+        <span class="token comment">// 接收客户端传过来的数据</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'客户端说:'</span> <span class="token operator">+</span> data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        
+        <span class="token comment">// 向客户端发送数据</span>
+        <span class="token comment">// socket 只给当前发送消息给服务端的客户端发送消息</span>
+        socket<span class="token punctuation">.</span><span class="token function">emit</span><span class="token punctuation">(</span><span class="token string">'to-client'</span><span class="token punctuation">,</span><span class="token string">'我是服务器返回的数据'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        
+    <span class="token punctuation">}</span><span class="token punctuation">)</span> 
+    socket<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'disconnect'</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'断开连接了'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+server<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token number">3000</span><span class="token punctuation">,</span><span class="token string">&quot;127.0.0.1&quot;</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'app run at 127.0.0.1:3000'</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p><img src="http://blog.poetries.top/img-repo/2019/10/392.png" alt=""></p> <blockquote><p>每一个连接上来的用户，都有一个 <code>socket</code>。由于我们的 <code>emit</code> 语句，是 <code>socket.emit()</code>发 出的，所以指的是向这个客户端发出语句。
+广播，就是给所有当前连接的用户发送信息:</p></blockquote> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">var</span> io <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'socket.io'</span><span class="token punctuation">)</span><span class="token punctuation">(</span>server<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+io<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'connection'</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">socket</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'和服务器建立连接了'</span><span class="token punctuation">)</span>
+    
+    socket<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'to-server'</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'客户端说:'</span> <span class="token operator">+</span> data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        
+        <span class="token comment">// io 给所有建立连接的客户端发送数据，不管是哪个客户端发送消息，都会对所有客户端进行广播一次</span>
+        io<span class="token punctuation">.</span><span class="token function">emit</span><span class="token punctuation">(</span><span class="token string">'to-client'</span><span class="token punctuation">,</span><span class="token string">'我是服务器返回的数据'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span> 
+    socket<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'disconnect'</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'断开连接了'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div><p><img src="http://blog.poetries.top/img-repo/2019/10/393.png" alt=""> <img src="http://blog.poetries.top/img-repo/2019/10/394.png" alt=""></p> <ul><li><code>io.emit()</code>可以实现聊天室消息群发</li> <li><code>socket.emit()</code>可以实现聊天机器人，一对一发送</li></ul> <h4 id="_1-4-客户端端通过emit广播，通过on接收广播"><a href="#_1-4-客户端端通过emit广播，通过on接收广播" class="header-anchor">#</a> 1.4 客户端端通过emit广播，通过on接收广播</h4> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// index.html</span>
+<span class="token operator">&lt;</span><span class="token operator">!</span><span class="token constant">DOCTYPE</span> html<span class="token operator">&gt;</span> 
+<span class="token operator">&lt;</span>html lang<span class="token operator">=</span><span class="token string">&quot;en&quot;</span><span class="token operator">&gt;</span> 
+<span class="token operator">&lt;</span>head<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>meta charset<span class="token operator">=</span><span class="token string">&quot;UTF-8&quot;</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>title<span class="token operator">&gt;</span>socket demo<span class="token operator">&lt;</span><span class="token operator">/</span>title<span class="token operator">&gt;</span> 
+<span class="token operator">&lt;</span><span class="token operator">/</span>head<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span>body<span class="token operator">&gt;</span>
+
+<span class="token operator">&lt;</span>h1<span class="token operator">&gt;</span>我是 index 页面，我引用了秘密 script 文件<span class="token operator">&lt;</span><span class="token operator">/</span>h1<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span>button id<span class="token operator">=</span><span class="token string">&quot;btn&quot;</span><span class="token operator">&gt;</span>给服务端发送数据<span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">&gt;</span>
+
+<span class="token operator">&lt;</span>script type<span class="token operator">=</span><span class="token string">&quot;text/javascript&quot;</span> src<span class="token operator">=</span><span class="token string">&quot;/socket.io/socket.io.js&quot;</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span> <span class="token operator">&lt;</span>script type<span class="token operator">=</span><span class="token string">&quot;text/javascript&quot;</span><span class="token operator">&gt;</span>
+
+    <span class="token comment">// 连接的地址http://localhost:3000 后台提供</span>
+    <span class="token keyword">var</span> socket <span class="token operator">=</span> io<span class="token punctuation">.</span><span class="token function">connect</span><span class="token punctuation">(</span><span class="token string">'http://localhost:3000'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 客户端建立连接</span>
+    socket<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'connect'</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'客户端和服务端建立连接了'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span> 
+
+    socket<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'disconnect'</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'客户端和服务端断开连接了'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span> 
+
+    <span class="token comment">// 客户端给服务端发送数据后，监听服务端返回的数据</span>
+    socket<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'to-client'</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'客户端说:'</span> <span class="token operator">+</span> data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span> 
+
+    <span class="token keyword">var</span> btn <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'btn'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    btn<span class="token punctuation">.</span><span class="token function-variable function">onclick</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        socket<span class="token punctuation">.</span><span class="token function">emit</span><span class="token punctuation">(</span><span class="token string">'to-server'</span><span class="token punctuation">,</span><span class="token string">'我是客户端的数据'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span>
+
+<span class="token operator">&lt;</span><span class="token operator">/</span>body<span class="token operator">&gt;</span> 
+<span class="token operator">&lt;</span><span class="token operator">/</span>html<span class="token operator">&gt;</span>
+</code></pre></div><h3 id="二、聊天室、智能机器人实现原理"><a href="#二、聊天室、智能机器人实现原理" class="header-anchor">#</a> 二、聊天室、智能机器人实现原理</h3> <h4 id="_2-1-express简单例子"><a href="#_2-1-express简单例子" class="header-anchor">#</a> 2.1 express简单例子</h4> <blockquote><p><code>Express</code> 结合 <code>Socket.io</code> 实现服务器和客户 端的相互通信、聊天室、智能机器人实现 原理</p></blockquote> <blockquote><ul><li><a href="http://www.expressjs.com.cn/starter/generator.html" target="_blank" rel="noopener noreferrer">express文档<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li> <li><a href="https://socket.io/docs" target="_blank" rel="noopener noreferrer">socket.io文档<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></blockquote> <p><strong>1. Server (app.js)</strong></p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">var</span> app <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'express'</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> server <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'http'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Server</span><span class="token punctuation">(</span>app<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> io <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'socket.io'</span><span class="token punctuation">)</span><span class="token punctuation">(</span>server<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+server<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token number">80</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// WARNING: app.listen(80) will NOT work here!</span>
+
+app<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  res<span class="token punctuation">.</span><span class="token function">sendFile</span><span class="token punctuation">(</span>__dirname <span class="token operator">+</span> <span class="token string">'/index.html'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+io<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'connection'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">socket</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  socket<span class="token punctuation">.</span><span class="token function">emit</span><span class="token punctuation">(</span><span class="token string">'news'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> hello<span class="token operator">:</span> <span class="token string">'world'</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  socket<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'my other event'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p><strong>2. Client (index.html)</strong></p> <div class="language-html extra-class"><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>/socket.io/socket.io.js<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+  <span class="token keyword">var</span> socket <span class="token operator">=</span> io<span class="token punctuation">.</span><span class="token function">connect</span><span class="token punctuation">(</span><span class="token string">'http://localhost'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  socket<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'news'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    socket<span class="token punctuation">.</span><span class="token function">emit</span><span class="token punctuation">(</span><span class="token string">'my other event'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> my<span class="token operator">:</span> <span class="token string">'data'</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><h4 id="_2-2-express实现智能机器人"><a href="#_2-2-express实现智能机器人" class="header-anchor">#</a> 2.2 express实现智能机器人</h4> <div class="language-html extra-class"><pre class="language-html"><code><span class="token comment">&lt;!--views/index.ejx--&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">&gt;</span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>/jquery-1.11.3.min.js<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>/socket.io/socket.io.js<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span>
+
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>text<span class="token punctuation">&quot;</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>msg<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">/&gt;</span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>send<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>发送<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+<span class="token function">$</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+    <span class="token keyword">var</span> socket <span class="token operator">=</span> io<span class="token punctuation">.</span><span class="token function">connect</span><span class="token punctuation">(</span><span class="token string">'http://127.0.0.1:8000'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">//群聊功能--聊天室</span>
+    <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#send'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">click</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">var</span> msg<span class="token operator">=</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#msg'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">val</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        socket<span class="token punctuation">.</span><span class="token function">emit</span><span class="token punctuation">(</span><span class="token string">'message'</span><span class="token punctuation">,</span>msg<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">/*客户端给服务器发送数据*/</span>
+
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token comment">//接受服务器返回的数据</span>
+    socket<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'servermessage'</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// app.js</span>
+
+<span class="token keyword">var</span> express<span class="token operator">=</span><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'express'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> app<span class="token operator">=</span><span class="token function">express</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">/*第一步*/</span>
+<span class="token keyword">var</span> server <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'http'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Server</span><span class="token punctuation">(</span>app<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> io <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'socket.io'</span><span class="token punctuation">)</span><span class="token punctuation">(</span>server<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+app<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span><span class="token string">'view engine'</span><span class="token punctuation">,</span><span class="token string">'ejs'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>express<span class="token punctuation">.</span><span class="token function">static</span><span class="token punctuation">(</span><span class="token string">'public'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+app<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span>res</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment">//res.send('首页');</span>
+    res<span class="token punctuation">.</span><span class="token function">render</span><span class="token punctuation">(</span><span class="token string">'index'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+
+app<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'/news'</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span>res</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    res<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token string">'news'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment">//2.监听端口</span>
+server<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token number">8000</span><span class="token punctuation">,</span><span class="token string">'127.0.0.1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">/*改ip*/</span>
+
+
+
+<span class="token comment">//3、写socket的代码</span>
+
+io<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'connection'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">socket</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'建立链接'</span><span class="token punctuation">)</span>
+
+    socket<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'message'</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">//io.emit  广播 --- 聊天室</span>
+        <span class="token comment">//socket.emit  谁给我发的信息我回返回给谁 --- 智能机器人</span>
+
+
+        <span class="token comment">//io.emit('servermessage',data);   /*服务器给客户端发送数据*/</span>
+
+
+        <span class="token keyword">if</span><span class="token punctuation">(</span>data<span class="token operator">==</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+            <span class="token keyword">var</span> msg<span class="token operator">=</span><span class="token string">'您当前的话费有2元'</span>
+        <span class="token punctuation">}</span><span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>data<span class="token operator">==</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">var</span> msg<span class="token operator">=</span><span class="token string">'您当前的流量有200M'</span>
+
+        <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+            <span class="token keyword">var</span> msg<span class="token operator">=</span><span class="token string">'请输入正确的信息'</span>
+        <span class="token punctuation">}</span>
+
+        socket<span class="token punctuation">.</span><span class="token function">emit</span><span class="token punctuation">(</span><span class="token string">'servermessage'</span><span class="token punctuation">,</span>msg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><blockquote><p><a href="https://github.com/poetries/socket.io-demo/tree/master/express-socket-chat" target="_blank" rel="noopener noreferrer">完整代码<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p></blockquote> <h4 id="_2-3-express结合socket-io及数据库实现智能机器人"><a href="#_2-3-express结合socket-io及数据库实现智能机器人" class="header-anchor">#</a> 2.3 express结合<code>socket.io</code>及数据库实现智能机器人</h4> <blockquote><p>跨域也可以访问<code>socket.io</code></p></blockquote> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// app.js</span>
+
+<span class="token keyword">var</span> express<span class="token operator">=</span><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'express'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> app<span class="token operator">=</span><span class="token function">express</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> <span class="token constant">DB</span><span class="token operator">=</span><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./module/db.js'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">/*第一步*/</span>
+<span class="token keyword">var</span> server <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'http'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Server</span><span class="token punctuation">(</span>app<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> io <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'socket.io'</span><span class="token punctuation">)</span><span class="token punctuation">(</span>server<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+app<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span><span class="token string">'view engine'</span><span class="token punctuation">,</span><span class="token string">'ejs'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>express<span class="token punctuation">.</span><span class="token function">static</span><span class="token punctuation">(</span><span class="token string">'public'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+app<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span>res</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment">//res.send('首页');</span>
+    res<span class="token punctuation">.</span><span class="token function">render</span><span class="token punctuation">(</span><span class="token string">'index'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+
+app<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'/news'</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span>res</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    res<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token string">'news'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment">//2.监听端口</span>
+server<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token number">8000</span><span class="token punctuation">,</span><span class="token string">'127.0.0.1'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'app run at 127.0.0.1:8000'</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">/*改ip*/</span>
+
+
+<span class="token comment">//3、写socket的代码</span>
+
+io<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'connection'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">socket</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'建立链接'</span><span class="token punctuation">)</span>
+
+    socket<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'message'</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+        <span class="token comment">//socket.emit('servermessage',msg);</span>
+
+        <span class="token keyword">var</span> msg<span class="token operator">=</span>data<span class="token punctuation">.</span>msg<span class="token operator">||</span><span class="token string">''</span><span class="token punctuation">;</span>  <span class="token comment">/*获取客户端的数据*/</span>
+
+        <span class="token comment">//去服务器查询数据</span>
+
+        <span class="token constant">DB</span><span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token string">'article'</span><span class="token punctuation">,</span><span class="token punctuation">{</span><span class="token string">'title'</span><span class="token operator">:</span><span class="token punctuation">{</span>$regex<span class="token operator">:</span><span class="token keyword">new</span> <span class="token class-name">RegExp</span><span class="token punctuation">(</span>msg<span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{</span><span class="token string">'title'</span><span class="token operator">:</span><span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span>data</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+            socket<span class="token punctuation">.</span><span class="token function">emit</span><span class="token punctuation">(</span><span class="token string">'servermessage'</span><span class="token punctuation">,</span><span class="token punctuation">{</span>
+                result<span class="token operator">:</span>data
+            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><div class="language-html extra-class"><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>!DOCTYPE</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span>
+  <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>https://code.jquery.com/jquery-3.3.1.min.js<span class="token punctuation">&quot;</span></span>
+  <span class="token attr-name">integrity</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=<span class="token punctuation">&quot;</span></span>
+  <span class="token attr-name">crossorigin</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>anonymous<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>/socket.io/socket.io.js<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">&gt;</span></span><span class="token style"><span class="token language-css">
+
+        <span class="token selector">.box</span><span class="token punctuation">{</span>
+            <span class="token property">width</span><span class="token punctuation">:</span> 300px<span class="token punctuation">;</span>
+            <span class="token property">height</span><span class="token punctuation">:</span> 400px<span class="token punctuation">;</span>
+            <span class="token property">margin</span><span class="token punctuation">:</span> 0 auto<span class="token punctuation">;</span>
+            <span class="token property">border</span><span class="token punctuation">:</span> 1px solid #666<span class="token punctuation">;</span>
+            <span class="token property">margin-top</span><span class="token punctuation">:</span>20px<span class="token punctuation">;</span>
+
+
+        <span class="token punctuation">}</span>
+        <span class="token selector">.list</span><span class="token punctuation">{</span>
+            <span class="token property">width</span><span class="token punctuation">:</span> 300px<span class="token punctuation">;</span>
+            <span class="token property">height</span><span class="token punctuation">:</span> 360px<span class="token punctuation">;</span>
+            <span class="token property">overflow-y</span><span class="token punctuation">:</span> auto<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token selector">.message</span><span class="token punctuation">{</span>
+            <span class="token property">height</span><span class="token punctuation">:</span> 40px<span class="token punctuation">;</span>
+            <span class="token property">line-height</span><span class="token punctuation">:</span> 44px<span class="token punctuation">;</span>
+            <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token selector">.message input</span><span class="token punctuation">{</span>
+
+            <span class="token property">border</span><span class="token punctuation">:</span> 1px solid #666<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token selector">.message input[type='text']</span><span class="token punctuation">{</span>
+            <span class="token property">flex</span><span class="token punctuation">:</span> 1<span class="token punctuation">;</span>
+            <span class="token property">height</span><span class="token punctuation">:</span> 38px<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token selector">.message input[type='button']</span><span class="token punctuation">{</span>
+            <span class="token property">width</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+            <span class="token property">height</span><span class="token punctuation">:</span> 40px<span class="token punctuation">;</span>
+            <span class="token property">border</span><span class="token punctuation">:</span> 1px solid #666<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>box<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>list<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>list<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>footer<span class="token punctuation">&quot;</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>footer<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+        
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>message<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>text<span class="token punctuation">&quot;</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>msg<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>button<span class="token punctuation">&quot;</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>send<span class="token punctuation">&quot;</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>发送<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+
+
+    <span class="token function">$</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+        <span class="token keyword">var</span> socket <span class="token operator">=</span> io<span class="token punctuation">.</span><span class="token function">connect</span><span class="token punctuation">(</span><span class="token string">'http://127.0.0.1:8000'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        socket<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'servermessage'</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+            <span class="token keyword">if</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>result<span class="token punctuation">.</span>length<span class="token punctuation">)</span>
+
+            <span class="token punctuation">{</span>
+                <span class="token keyword">var</span> str<span class="token operator">=</span><span class="token string">'&lt;ul&gt;'</span><span class="token punctuation">;</span>
+                <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">var</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span>data<span class="token punctuation">.</span>result<span class="token punctuation">.</span>length<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+                    str<span class="token operator">+=</span><span class="token string">'&lt;li&gt;'</span><span class="token operator">+</span>data<span class="token punctuation">.</span>result<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>title<span class="token operator">+</span><span class="token string">'&lt;/li&gt;'</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                str<span class="token operator">+=</span><span class="token string">'&lt;/ul&gt;'</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+
+                <span class="token keyword">var</span> str<span class="token operator">=</span><span class="token string">'&lt;p&gt;没有找到您要的数据，请联系人工客服&lt;/p&gt;'</span>
+            <span class="token punctuation">}</span>
+            <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#list'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#footer'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">scrollIntoView</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+        <span class="token keyword">var</span> username<span class="token operator">=</span><span class="token string">'zhangsan'</span><span class="token operator">+</span>Math<span class="token punctuation">.</span><span class="token function">floor</span><span class="token punctuation">(</span>Math<span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">*</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">//群聊功能--聊天室</span>
+        <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#send'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">click</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">var</span> msg<span class="token operator">=</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#msg'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">val</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            socket<span class="token punctuation">.</span><span class="token function">emit</span><span class="token punctuation">(</span><span class="token string">'message'</span><span class="token punctuation">,</span><span class="token punctuation">{</span>
+                <span class="token string">'username'</span><span class="token operator">:</span>username<span class="token punctuation">,</span>
+                <span class="token string">'msg'</span><span class="token operator">:</span>msg
+            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#list'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">&lt;p&gt;&lt;strong&gt;</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>username<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">:&lt;/strong&gt;  </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>msg<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&lt;/p&gt;</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#msg'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">val</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><blockquote><p><a href="https://github.com/poetries/socket.io-demo/tree/master/express-socket-chat-use-db" target="_blank" rel="noopener noreferrer">完整代码<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p></blockquote> <h3 id="三、koa中socket-io的使用"><a href="#三、koa中socket-io的使用" class="header-anchor">#</a> 三、Koa中Socket.io的使用</h3> <p><strong>1. 服务端配置</strong></p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># 1 安装</span>
+cnpm i -S koa-socket
+</code></pre></div><div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// app.js</span>
+
+<span class="token comment">// 2 引入</span>
+<span class="token keyword">const</span> <span class="token constant">IO</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span> <span class="token string">'koa-socket'</span> <span class="token punctuation">)</span>
+
+<span class="token comment">// 3 实例化</span>
+<span class="token keyword">const</span> io <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">IO</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+io<span class="token punctuation">.</span><span class="token function">attach</span><span class="token punctuation">(</span> app <span class="token punctuation">)</span>
+
+<span class="token comment">// 4 配置服务端</span>
+
+app<span class="token punctuation">.</span>_io<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span> <span class="token string">'connection'</span><span class="token punctuation">,</span> <span class="token parameter">socket</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'建立连接了'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div><p><strong>2. 客户端代码</strong></p> <div class="language-html extra-class"><pre class="language-html"><code> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>http://localhost:3000/socket.io/socket.io.js<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+    <span class="token keyword">var</span> socket<span class="token operator">=</span>io<span class="token punctuation">.</span><span class="token function">connect</span><span class="token punctuation">(</span><span class="token string">'http://localhost:3000/'</span><span class="token punctuation">)</span>
+ </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><blockquote><p><a href="https://github.com/poetries/socket.io-demo/tree/master/koa-socket.io" target="_blank" rel="noopener noreferrer">完整代码<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p></blockquote></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">2020/1/31 上午4:03:11</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/node-learning-notes/notes/other/03-Cookie、Session、Token、JWT.html" class="prev">
+        Cookie、Session、Token、JWT
+      </a></span> <!----></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/node-learning-notes/assets/js/app.06995101.js" defer></script><script src="/node-learning-notes/assets/js/4.cbb566af.js" defer></script><script src="/node-learning-notes/assets/js/106.e0e65ae5.js" defer></script>
+  </body>
+</html>
