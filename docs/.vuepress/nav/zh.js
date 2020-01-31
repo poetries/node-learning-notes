@@ -1,6 +1,6 @@
 module.exports = [
   {
-    text: 'node笔记',
-    link: '/notes/base/01-Node.js 基础',
+    text: 'Node.js学习指南',
+    link: '/notes/base/01-环境搭建',
   },
 ]

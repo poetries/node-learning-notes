@@ -6,8 +6,8 @@ module.exports = ctx => ({
   locales: {
     '/': {
       lang: 'zh-CN',
-      title: 'Node笔记',
-      description: 'Nodejs笔记系统整理'
+      title: 'Node.js学习指南',
+      description: 'Node.js笔记系统整理'
     }
   },
   head: [
